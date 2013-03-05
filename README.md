@@ -4,10 +4,8 @@ videojs-debugger
 <h4>How to use the Brightcove Videojs Player Debugger</h4>
 
 In your page:<br>
-1. Include the debugger.js file inside a <script> tag:<br>
-   <script src="http://url-to-debugger.js"></script><br>
-2. Include the debugger.css file inside a <link> tag:<br>
-   <link href="http://url-to-debugger.css" rel="stylesheet" type="text/css"><br>
+1. Include the debugger.js file inside a <script> tag: <script src="http://url-to-debugger.js"></script><br>
+2. Include the debugger.css file inside a &lt;link&gt; tag: &lt;link href="http://url-to-debugger.css" rel="stylesheet" type="text/css"&gt;
 
 <h4>When your page loads, the debugger is hidden by default.</h4>
 To toggle the debugger on and off:<br>
