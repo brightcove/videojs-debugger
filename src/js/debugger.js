@@ -98,18 +98,17 @@
     };
 
     function addMessage(type, content) { //adds a message to the output list
-      //content = (content.constructor == Array) ? content.join('') : content;
+      content = (content.constructor == Array) ? content.join('') : content;
       if (outputList) {
         var newMsg = document.createElement('LI');
         newMsg.className = type;
-        newMsg.innerHTML = [returnCurrentTime(), type, content].join('');
+        newMsg.innerHTML = [ '<span class="icon"></span>', returnCurrentTime(), content ].join( '' )
         outputList.appendChild(newMsg);
         scrollToBottom();
       } else {
-        cache.push(['<li>', returnCurrentTime(), type,  content, '</li>'].join(''));
+        cache.push(['<li class="', type, '"><span class="icon"></span>', returnCurrentTime(),  content, '</li>'].join(''));
       }
-                  emailArray.push([returnCurrentTime(), type,  content].join(''));
-
+      emailArray.push(['<li class="', type, '"><span class="icon"></span>', returnCurrentTime(),  content, '</li>'].join(''));
     };
 
     function clear() { //clear list output
@@ -315,7 +314,7 @@
     var history = videojs.log.history && videojs.log.history.slice();
     videojs.log = function() {
       var args = Array.prototype.slice.call(arguments);
-      addMessage("info:  ", args.reduce(function(str, arg, i) {
+      addMessage("info", args.reduce(function(str, arg, i) {
         return str + JSON.stringify(arg) + (i === args.length - 1 ? "" : ", ");
       }, ""));
 
@@ -325,7 +324,7 @@
     if (history) {
       history.forEach(function(arrgs) {
         var args = Array.prototype.slice.call(arrgs);
-        addMessage("info:  ", args.reduce(function(str, arg, i) {
+        addMessage("info", args.reduce(function(str, arg, i) {
           return str + JSON.stringify(arg) + (i === args.length - 1 ? "" : ", ");
         }, ""));
       });
