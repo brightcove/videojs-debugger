@@ -6,13 +6,11 @@ videojs-debugger
 In your page:<br>
 1. Include the debugger.js file inside a <script> tag: <script src="http://url-to-debugger.js"></script><br>
 2. Include the debugger.css file inside a &lt;link&gt; tag: &lt;link href="http://url-to-debugger.css" rel="stylesheet" type="text/css"&gt; <br>
-3. Add some Javascript after the video tag in your page, to add the plugin to the VideoJS player:<br>
-&lt;script&gt; <br>
-    vid = document.getElementById("vid1");<br>
-    vjs.plugin('debuggerWindow', debuggerWindow);<br>
-    var video = vjs('#vid1');<br>
-    video.debuggerWindow({});<br>
-&lt;/script&gt; <br>
+3. Add some Javascript after the video tag in your page, to initialize the plugin to your VideoJS player:<br>
+```js
+var player = videojs('video');
+player.debuggerWindow();
+```
 4. Add logging in your other plugins, using videojs.log();<br>
 
 <h4>When your page loads, the debugger is hidden by default.</h4>
