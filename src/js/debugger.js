@@ -11,7 +11,7 @@ function debuggerWindow(options) {
 
   "use strict";
 
-  var 
+  var
     NAMESPACE = 'log',
     bbird,
     outputList,
@@ -35,7 +35,7 @@ function debuggerWindow(options) {
     warn: true,
     error: true,
     profile: true
-  };  
+  };
 
   videojs.oldLog = videojs.log;
   videojs.log = addMessage;
@@ -52,7 +52,7 @@ function debuggerWindow(options) {
     newNode.innerHTML = [
       '<div class="header">',
         '<div class="left">',
-          '<div id="', IDs.filters, '" class="filters" title="click to filter by message type">', spans.join(''), 
+          '<div id="', IDs.filters, '" class="filters" title="click to filter by message type">', spans.join(''),
           '</div>',
         '</div>',
         '<div class="right">',
@@ -98,11 +98,11 @@ function debuggerWindow(options) {
                 emailArray.push([returnCurrentTime(), type,  content].join(''));
 
   };
-  
+
   function clear() { //clear list output
     outputList.innerHTML = '';
   };
-  
+
   function clickControl(evt) {
     if (!evt) {
                     evt = window.event;
@@ -117,7 +117,7 @@ function debuggerWindow(options) {
       }
     }
   };
-  
+
   function clickFilter(evt) { //show/hide a specific message type
     if (!evt) {
                     evt = window.event;
@@ -172,29 +172,29 @@ function debuggerWindow(options) {
   function scrollToBottom() { //scroll list output to the bottom
     outputList.scrollTop = outputList.scrollHeight;
   };
-  
+
   function isVisible() { //determine the visibility
     return (bbird.style.display == 'block');
   }
 
-  function hide() { 
+  function hide() {
     bbird.style.display = 'none';
   };
-      
+
   function show() {
     var body = document.getElementsByTagName('BODY')[0];
     body.removeChild(bbird);
     body.appendChild(bbird);
     bbird.style.display = 'block';
   };
-  
+
   //sets the position
   function reposition(position) {
     if (position === undefined || position == null) {
       //set to initial position ('topRight') or move to next position
       position = (state && state.pos === null) ? 1 : (state.pos + 1) % 4;
     }
-        
+
     switch (position) {
       case 0: classes[0] = 'bbTopLeft'; break;
       case 1: classes[0] = 'bbTopRight'; break;
@@ -214,7 +214,7 @@ function debuggerWindow(options) {
 
     var span = document.getElementById(IDs.size);
     span.title = (size === 1) ? 'small' : 'large';
-    span.className = span.title;    
+    span.className = span.title;
 
     state.size = size;
     setState();
@@ -224,11 +224,11 @@ function debuggerWindow(options) {
   function setState() {
     var entry, word, props = [], newClass = [], expiration = new Date();
     for (entry in state) {
-      var value = (state[entry] && state[entry].constructor === String) ? '"' + state[entry] + '"' : state[entry]; 
+      var value = (state[entry] && state[entry].constructor === String) ? '"' + state[entry] + '"' : state[entry];
       props.push(entry + ':' + value);
     }
     props = props.join(',');
-    
+
     expiration.setDate(expiration.getDate() + 14);
     document.cookie = ['blackbird={', props, '}; expires=', expiration.toUTCString() ,';'].join('');
 
@@ -237,22 +237,22 @@ function debuggerWindow(options) {
     }
     bbird.className = newClass.join(' ');
   };
-  
+
   function getState() {
     var re = new RegExp(/blackbird=({[^;]+})(;|\b|$)/);
     var match = re.exec(document.cookie);
     return (match && match[1]) ? eval('(' + match[1] + ')') : { pos:null, size:null, load:null };
   };
-  
+
   //event handler for 'keyup' event for window
   function readKey(evt) {
     if (!evt) evt = window.event;
     var code = 113; //F2 key
-          
+
     if (evt && evt.keyCode == code) {
-          
+
       var visible = isVisible();
-          
+
       if (visible && evt.shiftKey && evt.altKey) clear();
       else if   (visible && evt.shiftKey) reposition();
       else if (!evt.shiftKey && !evt.altKey) {
@@ -306,7 +306,7 @@ function debuggerWindow(options) {
       function() { clear(); },
     move:
       function() { reposition(); },
-    debug: 
+    debug:
       function(msg) { addMessage('debug: ', msg); },
     warn:
       function(msg) { addMessage('warn:  ', msg); },
@@ -314,7 +314,7 @@ function debuggerWindow(options) {
       function(msg) { addMessage('info:  ', msg); },
     error:
       function(msg) { addMessage('error: ', msg); },
-    profile: 
+    profile:
       function(label) {
         currentTime = new Date(); //record the current time when profile() is executed
         if (label == undefined || label == '') {
@@ -337,7 +337,7 @@ function debuggerWindow(options) {
     var body = document.getElementsByTagName('BODY')[0];
     bbird = body.appendChild(generateMarkup());
     outputList = bbird.getElementsByTagName('OL')[0];
-    
+
     //add events
     addEvent(IDs.sendEmail, 'click', clickSendEmail);
     addEvent(IDs.filters, 'click', clickFilter);
@@ -380,11 +380,11 @@ function debuggerWindow(options) {
     if(minutes < 10) { minutes = "0" + minutes; }
     if(seconds < 10) { seconds = "0" + seconds; }
 
-    return currentTime.getFullYear() +"-" + 
+    return currentTime.getFullYear() +"-" +
            month + "-" +
-           day + " " + 
-           currentTime.getHours() + ":" + 
-           minutes + ":" + 
+           day + " " +
+           currentTime.getHours() + ":" +
+           minutes + ":" +
            seconds + " ";
   };
 
