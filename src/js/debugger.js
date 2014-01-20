@@ -200,6 +200,14 @@
       bbird.style.display = 'block';
     };
 
+    function toggleVisibility() {
+      if (isVisible()) {
+        hide();
+      } else {
+        show();
+      }
+    }
+
     //sets the position
     function reposition(position) {
       if (position === undefined || position == null) {
@@ -262,14 +270,7 @@
       var code = 113; //F2 key
 
       if (evt && evt.keyCode == code) {
-
-        var visible = isVisible();
-
-        if (visible && evt.shiftKey && evt.altKey) clear();
-        else if   (visible && evt.shiftKey) reposition();
-        else if (!evt.shiftKey && !evt.altKey) {
-          (visible) ? hide() : show();
-        }
+        toggleVisibility();
       }
     };
 
@@ -279,12 +280,7 @@
         evt = window.event;
         evt.preventDefault();
       }
-      var visible = isVisible();
-      if (visible) {
-        hide();
-      } else {
-        show();
-      }
+      toggleVisibility();
     };
 
     //event management (thanks John Resig)
