@@ -7,8 +7,6 @@
 
   function debuggerWindow(options) {
 
-    "use strict";
-
     var
       NAMESPACE = 'log',
       bbird,
@@ -330,42 +328,6 @@
         }
     }
 
-    addEvent(window, 'DOMContentLoaded', function() {
-      /* initialize Blackbird when the page loads */
-      var body = document.getElementsByTagName('BODY')[0];
-      bbird = body.appendChild(generateMarkup());
-      outputList = bbird.getElementsByTagName('OL')[0];
-
-      //add events
-      addEvent(IDs.sendEmail, 'click', clickSendEmail);
-      addEvent(IDs.filters, 'click', clickFilter);
-      addEvent(IDs.controls, 'click', clickControl);
-      addEvent(document, 'keyup', readKey);
-      addEvent(document, 'touchmove', readGesture);
-
-      resize(state.size);
-      reposition(state.pos);
-      if (state.load) {
-        show();
-      }
-
-      scrollToBottom();
-
-      window[NAMESPACE].init = function() {
-        show();
-        window[NAMESPACE].error(['<b>', NAMESPACE, '</b> can only be initialized once']);
-      }
-
-      addEvent(window, 'unload', function() {
-        removeEvent(IDs.sendEmail, 'click', clickSendEmail);
-        removeEvent(IDs.filters, 'click', clickFilter);
-        removeEvent(IDs.controls, 'click', clickControl);
-        removeEvent(document, 'keyup', readKey);
-        removeEvent(document, 'touchmove', readGesture);
-      });
-
-    });
-
     var returnCurrentTime = function() {
       var month, day, minutes, seconds;
       currentTime = new Date();
@@ -386,6 +348,39 @@
              seconds + " ";
     };
 
+    var body = document.getElementsByTagName('BODY')[0];
+    bbird = body.appendChild(generateMarkup());
+    outputList = bbird.getElementsByTagName('OL')[0];
+
+    //add events
+    addEvent(IDs.sendEmail, 'click', clickSendEmail);
+    addEvent(IDs.filters, 'click', clickFilter);
+    addEvent(IDs.controls, 'click', clickControl);
+    addEvent(document, 'keyup', readKey);
+    addEvent(document, 'touchmove', readGesture);
+
+    resize(state.size);
+    reposition(state.pos);
+    if (state.load) {
+      show();
+    }
+
+    scrollToBottom();
+
+    window[NAMESPACE].init = function() {
+      show();
+      window[NAMESPACE].error(['<b>', NAMESPACE, '</b> can only be initialized once']);
+    }
+
+    addEvent(window, 'unload', function() {
+      removeEvent(IDs.sendEmail, 'click', clickSendEmail);
+      removeEvent(IDs.filters, 'click', clickFilter);
+      removeEvent(IDs.controls, 'click', clickControl);
+      removeEvent(document, 'keyup', readKey);
+      removeEvent(document, 'touchmove', readGesture);
+    });
+
+    show();
   };
 
   videojs.plugin('debuggerWindow', debuggerWindow);
