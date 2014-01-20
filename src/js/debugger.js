@@ -33,8 +33,25 @@
       profile: true
     };
 
-    videojs.oldLog = videojs.log;
-    videojs.log = addMessage;
+    function returnCurrentTime() {
+      var month, day, minutes, seconds;
+      currentTime = new Date();
+      month = currentTime.getMonth() + 1;
+      if(month < 10) { month = "0" + month };
+      day = currentTime.getDay();
+      if(day < 10) { day = "0" + day };
+      minutes = currentTime.getMinutes();
+      seconds = currentTime.getSeconds();
+      if(minutes < 10) { minutes = "0" + minutes; }
+      if(seconds < 10) { seconds = "0" + seconds; }
+
+      return currentTime.getFullYear() +"-" +
+             month + "-" +
+             day + " " +
+             currentTime.getHours() + ":" +
+             minutes + ":" +
+             seconds + " ";
+    };
 
     function generateMarkup() { //build markup
       var type, spans = [];
@@ -293,60 +310,61 @@
       }
     };
 
-    window[NAMESPACE] = {
-      toggle:
-        function() { addEvent(window, window.event.shiftKey); },
-      resize:
-        function() { resize(); },
-      clear:
-        function() { clear(); },
-      move:
-        function() { reposition(); },
-      debug:
-        function(msg) { addMessage('debug: ', msg); },
-      warn:
-        function(msg) { addMessage('warn:  ', msg); },
-      info:
-        function(msg) { addMessage('info:  ', msg); },
-      error:
-        function(msg) { addMessage('error: ', msg); },
-      profile:
-        function(label) {
-          currentTime = new Date(); //record the current time when profile() is executed
-          if (label == undefined || label == '') {
-            addMessage('error', '<b>ERROR:</b> Please specify a label for your profile statement');
-          }
-          else if (profiler[label]) {
-            addMessage('profile', [label, ': ', currentTime - profiler[label],  'ms'].join(''));
-            delete profiler[label];
-          }
-          else {
-            profiler[label] = currentTime;
-            addMessage('profile', label);
-          }
-          return currentTime;
-        }
+
+    var oldLog = videojs.log;
+    var history = videojs.log.history && videojs.log.history.slice();
+    videojs.log = function() {
+      var args = Array.prototype.slice.call(arguments);
+      addMessage("info:  ", args.reduce(function(str, arg, i) {
+        return str + JSON.stringify(arg) + (i === args.length - 1 ? "" : ", ");
+      }, ""));
+
+      videojs.log.oldLog.apply(videojs, arguments);
+    };
+    videojs.log.oldLog = oldLog;
+    if (history) {
+      history.forEach(function(arrgs) {
+        var args = Array.prototype.slice.call(arrgs);
+        addMessage("info:  ", args.reduce(function(str, arg, i) {
+          return str + JSON.stringify(arg) + (i === args.length - 1 ? "" : ", ");
+        }, ""));
+      });
     }
 
-    var returnCurrentTime = function() {
-      var month, day, minutes, seconds;
-      currentTime = new Date();
-      month = currentTime.getMonth() + 1;
-      if(month < 10) { month = "0" + month };
-      day = currentTime.getDay();
-      if(day < 10) { day = "0" + day };
-      minutes = currentTime.getMinutes();
-      seconds = currentTime.getSeconds();
-      if(minutes < 10) { minutes = "0" + minutes; }
-      if(seconds < 10) { seconds = "0" + seconds; }
-
-      return currentTime.getFullYear() +"-" +
-             month + "-" +
-             day + " " +
-             currentTime.getHours() + ":" +
-             minutes + ":" +
-             seconds + " ";
-    };
+    //window[NAMESPACE] = {
+      //toggle:
+        //function() { addEvent(window, window.event.shiftKey); },
+      //resize:
+        //function() { resize(); },
+      //clear:
+        //function() { clear(); },
+      //move:
+        //function() { reposition(); },
+      //debug:
+        //function(msg) { addMessage('debug: ', msg); },
+      //warn:
+        //function(msg) { addMessage('warn:  ', msg); },
+      //info:
+        //function(msg) { addMessage('info:  ', msg); },
+      //error:
+        //function(msg) { addMessage('error: ', msg); },
+      //profile:
+        //function(label) {
+          //currentTime = new Date(); //record the current time when profile() is executed
+          //if (label == undefined || label == '') {
+            //addMessage('error', '<b>ERROR:</b> Please specify a label for your profile statement');
+          //}
+          //else if (profiler[label]) {
+            //addMessage('profile', [label, ': ', currentTime - profiler[label],  'ms'].join(''));
+            //delete profiler[label];
+          //}
+          //else {
+            //profiler[label] = currentTime;
+            //addMessage('profile', label);
+          //}
+          //return currentTime;
+        //}
+    //}
 
     var body = document.getElementsByTagName('BODY')[0];
     bbird = body.appendChild(generateMarkup());
@@ -367,10 +385,10 @@
 
     scrollToBottom();
 
-    window[NAMESPACE].init = function() {
-      show();
-      window[NAMESPACE].error(['<b>', NAMESPACE, '</b> can only be initialized once']);
-    }
+    //window[NAMESPACE].init = function() {
+      //show();
+      //window[NAMESPACE].error(['<b>', NAMESPACE, '</b> can only be initialized once']);
+    //}
 
     addEvent(window, 'unload', function() {
       removeEvent(IDs.sendEmail, 'click', clickSendEmail);
