@@ -378,11 +378,6 @@
 
     scrollToBottom();
 
-    //window[NAMESPACE].init = function() {
-      //show();
-      //window[NAMESPACE].error(['<b>', NAMESPACE, '</b> can only be initialized once']);
-    //}
-
     addEvent(window, 'unload', function() {
       removeEvent(IDs.sendEmail, 'click', clickSendEmail);
       removeEvent(IDs.filters, 'click', clickFilter);
