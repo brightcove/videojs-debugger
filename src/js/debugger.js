@@ -194,9 +194,8 @@
     };
 
     function show() {
-      var body = document.getElementsByTagName('BODY')[0];
-      body.removeChild(bbird);
-      body.appendChild(bbird);
+      document.body.removeChild(bbird);
+      document.body.appendChild(bbird);
       bbird.style.display = 'block';
     };
 
@@ -361,8 +360,7 @@
         //}
     //}
 
-    var body = document.getElementsByTagName('BODY')[0];
-    bbird = body.appendChild(generateMarkup());
+    bbird = document.body.appendChild(generateMarkup());
     outputList = bbird.getElementsByTagName('OL')[0];
 
     //add events
