@@ -325,40 +325,28 @@
       });
     }
 
-    //window[NAMESPACE] = {
-      //toggle:
-        //function() { addEvent(window, window.event.shiftKey); },
-      //resize:
-        //function() { resize(); },
-      //clear:
-        //function() { clear(); },
-      //move:
-        //function() { reposition(); },
-      //debug:
-        //function(msg) { addMessage('debug: ', msg); },
-      //warn:
-        //function(msg) { addMessage('warn:  ', msg); },
-      //info:
-        //function(msg) { addMessage('info:  ', msg); },
-      //error:
-        //function(msg) { addMessage('error: ', msg); },
-      //profile:
-        //function(label) {
-          //currentTime = new Date(); //record the current time when profile() is executed
-          //if (label == undefined || label == '') {
-            //addMessage('error', '<b>ERROR:</b> Please specify a label for your profile statement');
-          //}
-          //else if (profiler[label]) {
-            //addMessage('profile', [label, ': ', currentTime - profiler[label],  'ms'].join(''));
-            //delete profiler[label];
-          //}
-          //else {
-            //profiler[label] = currentTime;
-            //addMessage('profile', label);
-          //}
-          //return currentTime;
-        //}
-    //}
+    videojs.log.resize = function() { resize(); };
+    videojs.log.clear = function() { clear(); };
+    videojs.log.move = function() { reposition(); };
+    videojs.log.debug = function(msg) { addMessage('debug', msg); };
+    videojs.log.warn = function(msg) { addMessage('warn', msg); };
+    videojs.log.info = videojs.log;
+    videojs.log.error = function(msg) { addMessage('error', msg); };
+    videojs.log.profile = function(label) {
+      currentTime = new Date(); //record the current time when profile() is executed
+      if (label == undefined || label == '') {
+        addMessage('error', '<b>ERROR:</b> Please specify a label for your profile statement');
+      }
+      else if (profiler[label]) {
+        addMessage('profile', [label, ': ', currentTime - profiler[label],  'ms'].join(''));
+        delete profiler[label];
+      }
+      else {
+        profiler[label] = currentTime;
+        addMessage('profile', label);
+      }
+      return currentTime;
+    };
 
     bbird = document.body.appendChild(generateMarkup());
     outputList = bbird.getElementsByTagName('OL')[0];
