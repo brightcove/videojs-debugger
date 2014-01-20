@@ -5,12 +5,32 @@
 <script src="//vjs.zencdn.net/4.3/video.js"></script>
 <script src="src/js/debugger.js"></script>
 
+<p>
+To open the debugger, you codess <code>F12</code> on desktops, or do a two finger tap on mobile.
+</p>
+<p>
+To use the debugger, you have to call <code>videojs.log</code> with your logging statements.
+</p>
+
 <video id="video" class="video-js vjs-default-skin" controls width="640" height="264">
     <source src="//vjs.zencdn.net/v/oceans.mp4" type="video/mp4">
     <source src="//vjs.zencdn.net/v/oceans.webm" type="video/webm">
 </video>
 
 <script>
-var player = videojs("video");
+  var player = videojs("video", {}, function() {
+    videojs.log("player loaded");
+  }),
+  counter = 0,
+  logger;
+
 player.debuggerWindow();
+
+logger = setInterval(function() {
+  videojs.log(counter++);
+  if (counter > 100) {
+    clearInterval(logger);
+  }
+}, 1000)
+
 </script>
