@@ -73,7 +73,7 @@
 
 #blackbird .main .mainBody ol li.profile { color:#DDD; font-style:italic; }
 			
-#blackbird .errorHidden li.error,	#blackbird .warnHidden li.warn,	#blackbird .infoHidden li.info,	#blackbird .debugHidden li.debug,	#blackbird .profileHidden li.profile { display:block; }
+#blackbird .errorHidden li.error,	#blackbird .warnHidden li.warn,	#blackbird .infoHidden li.info,	#blackbird .debugHidden li.debug,	#blackbird .profileHidden li.profile { display:none; }
 
 #blackbird .main div.right { background:url(../img/debugger_panel.png) no-repeat 100% -30px; width:17px; _width:0; }
 
