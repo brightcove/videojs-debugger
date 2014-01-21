@@ -59,6 +59,7 @@
       readKey,
       readGesture,
       logger,
+      historyLogger,
       oldLog,
       history,
 
@@ -311,26 +312,30 @@
       bbird.className = newClass.join(' ');
     };
 
-    logger = function(messages) {
-      addMessage("info", reduce(messages, function(str, msg, i) {
+    logger = function(type, messages) {
+      addMessage(type, reduce(messages, function(str, msg, i) {
         return str + JSON.stringify(msg) + (i === messages.length - 1 ? "" : ", ");
       }, ""));
+    };
+    historyLogger = function(type, messages) {
+      messages.forEach(function(arrgs) {
+        var args = Array.prototype.slice.call(arrgs);
+        logger(type, args);
+      });
     }
     oldLog = videojs.log;
-    history = videojs.log.history && videojs.log.history.slice();
+    historyLogger("info", videojs.log.history);
+    historyLogger("debug", videojs.log.debug.history);
+    historyLogger("warn", videojs.log.warn.history);
+    historyLogger("error", videojs.log.error.history);
+
     videojs.log = function() {
       var args = Array.prototype.slice.call(arguments);
-      logger(args);
+      logger("info", args);
 
       videojs.log.oldLog.apply(videojs, arguments);
     };
     videojs.log.oldLog = oldLog;
-    if (history) {
-      history.forEach(function(arrgs) {
-        var args = Array.prototype.slice.call(arrgs);
-        logger(args);
-      });
-    }
 
     videojs.log.resize = function() { resize(); };
     videojs.log.clear = function() { clear(); };
