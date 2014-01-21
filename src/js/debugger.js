@@ -7,6 +7,15 @@
 
   var events = videojs.Player.prototype.debuggerWindow.getEvents;
 
+  function reduce(arr, callback, initial) {
+    var returnValue = initial;
+    var i = 0, l = arr.length;
+    for (; i < l; i++) {
+      returnValue = callback(returnValue, arr[i], i, arr);
+    }
+    return returnValue;
+  }
+
   //event management (thanks John Resig)
   function addEvent(obj, type, fn) {
     var obj = (obj.constructor === String) ? document.getElementById(obj) : obj;
@@ -299,7 +308,7 @@
     var history = videojs.log.history && videojs.log.history.slice();
     videojs.log = function() {
       var args = Array.prototype.slice.call(arguments);
-      addMessage("info", args.reduce(function(str, arg, i) {
+      addMessage("info", reduce(args, function(str, arg, i) {
         return str + JSON.stringify(arg) + (i === args.length - 1 ? "" : ", ");
       }, ""));
 
@@ -309,7 +318,7 @@
     if (history) {
       history.forEach(function(arrgs) {
         var args = Array.prototype.slice.call(arrgs);
-        addMessage("info", args.reduce(function(str, arg, i) {
+        addMessage("info", reduce(args, function(str, arg, i) {
           return str + JSON.stringify(arg) + (i === args.length - 1 ? "" : ", ");
         }, ""));
       });
