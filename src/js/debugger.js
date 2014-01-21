@@ -5,6 +5,31 @@
 (function(videojs, window, undefined) {
   'use strict';
 
+  var events = videojs.Player.prototype.debuggerWindow.getEvents;
+
+  //event management (thanks John Resig)
+  function addEvent(obj, type, fn) {
+    var obj = (obj.constructor === String) ? document.getElementById(obj) : obj;
+    if (obj.attachEvent) {
+      obj['e' + type + fn] = fn;
+      obj[type + fn] = function(){ obj['e' + type + fn](window.event); };
+      obj.attachEvent('on' + type, obj[type + fn]);
+    } else {
+      obj.addEventListener(type, fn, false);
+    }
+  };
+
+  function removeEvent(obj, type, fn) {
+    var obj = (obj.constructor === String) ? document.getElementById(obj) : obj;
+    if (obj.detachEvent) {
+      obj.detachEvent('on' + type, obj[type + fn]);
+      obj[type + fn] = null;
+    } else {
+      obj.removeEventListener(type, fn, false);
+    }
+  };
+
+
   function debuggerWindow(options) {
 
     var
@@ -14,12 +39,13 @@
       emailArray = [],
       state = {
         pos: 1,
-        size: 0,
-        load: true
+        size: 0
       },
       classes = {},
       profiler = {},
       currentTime,
+      readKey,
+      readGesture,
 
       IDs = {
         blackbird: 'blackbird',
@@ -269,51 +295,6 @@
       bbird.className = newClass.join(' ');
     };
 
-    //event handler for 'keyup' event for window
-    function readKey(evt) {
-      var code = 113; //F2 key
-
-      if (!evt) {
-        evt = window.event;
-      }
-
-      if (evt && evt.keyCode == code) {
-        toggleVisibility();
-      }
-    };
-
-    //event handler for 'touchmove' event for window
-    function readGesture(evt) {
-      if (!evt) {
-        evt = window.event;
-        evt.preventDefault();
-      }
-      toggleVisibility();
-    };
-
-    //event management (thanks John Resig)
-    function addEvent(obj, type, fn) {
-      var obj = (obj.constructor === String) ? document.getElementById(obj) : obj;
-      if (obj.attachEvent) {
-        obj['e' + type + fn] = fn;
-        obj[type + fn] = function(){ obj['e' + type + fn](window.event); };
-        obj.attachEvent('on' + type, obj[type + fn]);
-      } else {
-        obj.addEventListener(type, fn, false);
-      }
-    };
-
-    function removeEvent(obj, type, fn) {
-      var obj = (obj.constructor === String) ? document.getElementById(obj) : obj;
-      if (obj.detachEvent) {
-        obj.detachEvent('on' + type, obj[type + fn]);
-        obj[type + fn] = null;
-      } else {
-        obj.removeEventListener(type, fn, false);
-      }
-    };
-
-
     var oldLog = videojs.log;
     var history = videojs.log.history && videojs.log.history.slice();
     videojs.log = function() {
@@ -360,18 +341,19 @@
     bbird = document.body.appendChild(generateMarkup());
     outputList = bbird.getElementsByTagName('OL')[0];
 
-    //add events
+    events = events(toggleVisibility);
+    readKey = events.readKey;
+    readGesture = events.readGesture;
+
     addEvent(IDs.sendEmail, 'click', clickSendEmail);
     addEvent(IDs.filters, 'click', clickFilter);
     addEvent(IDs.controls, 'click', clickControl);
     addEvent(document, 'keyup', readKey);
-    addEvent(document, 'touchmove', readGesture);
+    addEvent(document, 'touchend', readGesture);
 
     resize(state.size);
     reposition(state.pos);
-    if (state.load) {
-      show();
-    }
+    show();
 
     scrollToBottom();
 
@@ -380,7 +362,7 @@
       removeEvent(IDs.filters, 'click', clickFilter);
       removeEvent(IDs.controls, 'click', clickControl);
       removeEvent(document, 'keyup', readKey);
-      removeEvent(document, 'touchmove', readGesture);
+      removeEvent(document, 'touchend', readGesture);
     });
   };
 

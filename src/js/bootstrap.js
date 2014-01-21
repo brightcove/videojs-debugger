@@ -1,6 +1,8 @@
 (function(videojs, window, undefined) {
   var options,
-      player;
+      player,
+      readKey,
+      readGesture;
 
   //event management (thanks John Resig)
   function addEvent(obj, type, fn) {
@@ -26,27 +28,32 @@
 
   function unbindEvents() {
     removeEvent(document, 'keyup', readKey);
-    removeEvent(document, 'touchmove', readGesture);
+    removeEvent(document, 'touchend', readGesture);
   }
 
-  //event handler for 'keyup' event for window
-  function readKey(evt) {
-    if (!evt) evt = window.event;
-    var code = 113; //F2 key
+  function getEvents(callback) {
+    return {
+      readKey: function readKey(evt) {
+        if (!evt) evt = window.event;
+        var code = 113; //F2 key
 
-    if (evt && evt.keyCode == code) {
-      loadDebugger();
-    }
-  };
+        if (evt && evt.keyCode == code) {
+          callback();
+        }
+      },
 
-  //event handler for 'touchmove' event for window
-  function readGesture(evt) {
-    if (!evt) {
-      evt = window.event;
-      evt.preventDefault();
-    }
-    loadDebugger();
-  };
+      readGesture: function readGesture(evt) {
+        if (!evt) {
+          evt = window.event;
+          evt.preventDefault();
+        }
+
+        if (evt.targetTouches.length + evt.changedTouches.length > 2) {
+          callback();
+        }
+      }
+    };
+  }
 
   function loadDebugger() {
     var s = document.createElement('script'),
@@ -68,14 +75,20 @@
   }
 
   videojs.plugin("debuggerWindow", function(opts) {
+    var events = getEvents(loadDebugger);
+
     options = opts;
     player = this;
+    readKey = events.readKey;
+    readGesture = events.readGesture;
 
     addEvent(document, 'keyup', readKey);
-    addEvent(document, 'touchmove', readGesture);
+    addEvent(document, 'touchend', readGesture);
 
     addEvent(window, 'unload', function() {
       unbindEvents();
     });
+
+    player.debuggerWindow.getEvents = getEvents;
   });
 })(videojs, window);
