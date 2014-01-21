@@ -8,12 +8,15 @@
   function debuggerWindow(options) {
 
     var
-      NAMESPACE = 'log',
       bbird,
       outputList,
       cache = [],
       emailArray = [],
-      state = getState(),
+      state = {
+        pos: 1,
+        size: 0,
+        load: true
+      },
       classes = {},
       profiler = {},
       currentTime,
@@ -241,26 +244,14 @@
     };
 
     function setState() {
-      var entry, word, props = [], newClass = [], expiration = new Date();
-      for (entry in state) {
-        var value = (state[entry] && state[entry].constructor === String) ? '"' + state[entry] + '"' : state[entry];
-        props.push(entry + ':' + value);
-      }
-      props = props.join(',');
-
-      expiration.setDate(expiration.getDate() + 14);
-      document.cookie = ['blackbird={', props, '}; expires=', expiration.toUTCString() ,';'].join('');
+      var word,
+          newClass = [];
 
       for (word in classes) {
         newClass.push(classes[word]);
       }
-      bbird.className = newClass.join(' ');
-    };
 
-    function getState() {
-      var re = new RegExp(/blackbird=({[^;]+})(;|\b|$)/);
-      var match = re.exec(document.cookie);
-      return (match && match[1]) ? eval('(' + match[1] + ')') : { pos:null, size:null, load:null };
+      bbird.className = newClass.join(' ');
     };
 
     //event handler for 'keyup' event for window
@@ -373,8 +364,6 @@
       removeEvent(document, 'keyup', readKey);
       removeEvent(document, 'touchmove', readGesture);
     });
-
-    show();
   };
 
   videojs.plugin('debuggerWindow', debuggerWindow);
