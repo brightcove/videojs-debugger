@@ -76,6 +76,7 @@
 
   function loadDebugger() {
     var s = document.createElement('script'),
+        l = document.createElement('link'),
         loaded = false;
 
     s.onload = s.onreadystatechange = function() {
@@ -88,9 +89,13 @@
       }
     };
 
-    s.src = options.url || "debugger.js";
+    s.src = options.js || "debugger.js";
+
+    l.rel = "stylesheet";
+    l.href = options.css || "debugger.css";
 
     document.body.appendChild(s);
+    document.body.appendChild(l);
   }
 
   videojs.plugin("debuggerWindow", function(opts) {

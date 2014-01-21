@@ -36,5 +36,8 @@
     videojs.log("player loaded", this.currentSrc());
   });
 
-  player.debuggerWindow({ url: "src/js/debugger.js" });
+  player.debuggerWindow({
+    js: "src/js/debugger.js",
+    css: "src/css/debugger.css"
+  });
 </script>

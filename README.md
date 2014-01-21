@@ -8,7 +8,10 @@
 
 ```js
 var player = videojs('video');
-player.debuggerWindow({ url: "src/js/debugger.js" });
+player.debuggerWindow({
+  js: "src/js/debugger.js",
+  css: "src/css/debugger.css"
+});
 ```
 
 ## F2 or Triple Tap to open debugger
@@ -19,7 +22,8 @@ The debugger is loaded on demand via a certain trigger.
 
 ## Options
 
-* `url`: The url to the debugger script
+* `js`: The url to the debugger script
+* `css`: The url to the debugger stylesheet
 
 ## Known issues
 
