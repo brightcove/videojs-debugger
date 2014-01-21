@@ -125,10 +125,12 @@
     };
 
     function clickControl(evt) {
+      var el;
+
       if (!evt) {
-                      evt = window.event;
-                  }
-      var el = (evt.target) ? evt.target : evt.srcElement;
+        evt = window.event;
+      }
+      el = (evt.target) ? evt.target : evt.srcElement;
 
       if (el.tagName == 'SPAN') {
         switch (el.getAttributeNode('op').nodeValue) {
@@ -140,26 +142,28 @@
     };
 
     function clickFilter(evt) { //show/hide a specific message type
+      var entry, span, type, filters, active, oneActiveFilter, i, spanType;
+
       if (!evt) {
-                      evt = window.event;
-                  }
-      var span = (evt.target) ? evt.target : evt.srcElement;
+        evt = window.event;
+      }
+      span = (evt.target) ? evt.target : evt.srcElement;
 
       if (span && span.tagName == 'SPAN') {
 
-        var type = span.getAttributeNode('type').nodeValue;
+        type = span.getAttributeNode('type').nodeValue;
 
         if (evt.altKey) {
-          var filters = document.getElementById(IDs.filters).getElementsByTagName('SPAN');
+          filters = document.getElementById(IDs.filters).getElementsByTagName('SPAN');
 
-          var active = 0;
+          active = 0;
           for (entry in messageTypes) {
             if (messageTypes[entry]) active++;
           }
-          var oneActiveFilter = (active == 1 && messageTypes[type]);
+          oneActiveFilter = (active == 1 && messageTypes[type]);
 
-          for (var i = 0; filters[i]; i++) {
-            var spanType = filters[i].getAttributeNode('type').nodeValue;
+          for (i = 0; filters[i]; i++) {
+            spanType = filters[i].getAttributeNode('type').nodeValue;
 
             filters[i].className = (oneActiveFilter || (spanType == type)) ? spanType : spanType + 'Disabled';
             messageTypes[spanType] = oneActiveFilter || (spanType == type);
@@ -168,12 +172,14 @@
         else {
           messageTypes[type] = ! messageTypes[type];
           span.className = (messageTypes[type]) ? type : type + 'Disabled';
-              }
+        }
 
         //build outputList's class from messageTypes object
         var disabledTypes = [];
         for (type in messageTypes) {
-          if (! messageTypes[type]) disabledTypes.push(type);
+          if (! messageTypes[type]) {
+            disabledTypes.push(type);
+          }
         }
         disabledTypes.push('');
         outputList.className = disabledTypes.join('Hidden ');
@@ -183,10 +189,11 @@
     };
 
     function clickSendEmail(evt) {
+      var el;
       if (!evt) {
         evt = window.event;
       }
-      var el = (evt.target) ? evt.target : evt.srcElement;
+      el = (evt.target) ? evt.target : evt.srcElement;
       window.open('mailto:email@example.com?subject=Brightcove Player Debugger Log&body=' + emailArray);
     };
 
@@ -234,13 +241,15 @@
     };
 
     function resize(size) {
+      var span;
+
       if (size === undefined || size === null) {
         size = (state && state.size == null) ? 0 : (state.size + 1) % 2;
-        }
+      }
 
       classes[1] = (size === 0) ? 'bbSmall' : 'bbLarge'
 
-      var span = document.getElementById(IDs.size);
+      span = document.getElementById(IDs.size);
       span.title = (size === 1) ? 'small' : 'large';
       span.className = span.title;
 
@@ -262,8 +271,11 @@
 
     //event handler for 'keyup' event for window
     function readKey(evt) {
-      if (!evt) evt = window.event;
       var code = 113; //F2 key
+
+      if (!evt) {
+        evt = window.event;
+      }
 
       if (evt && evt.keyCode == code) {
         toggleVisibility();
@@ -284,7 +296,7 @@
       var obj = (obj.constructor === String) ? document.getElementById(obj) : obj;
       if (obj.attachEvent) {
         obj['e' + type + fn] = fn;
-        obj[type + fn] = function(){ obj['e' + type + fn](window.event) };
+        obj[type + fn] = function(){ obj['e' + type + fn](window.event); };
         obj.attachEvent('on' + type, obj[type + fn]);
       } else {
         obj.addEventListener(type, fn, false);
