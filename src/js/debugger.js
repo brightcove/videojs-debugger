@@ -8,11 +8,14 @@
   var events = videojs.Player.prototype.debuggerWindow.getEvents;
 
   function reduce(arr, callback, initial) {
-    var returnValue = initial;
-    var i = 0, l = arr.length;
+    var returnValue = initial,
+        i = 0,
+        l = arr.length;
+
     for (; i < l; i++) {
       returnValue = callback(returnValue, arr[i], i, arr);
     }
+
     return returnValue;
   }
 
@@ -55,6 +58,9 @@
       currentTime,
       readKey,
       readGesture,
+      logger,
+      oldLog,
+      history,
 
       IDs = {
         blackbird: 'blackbird',
@@ -132,7 +138,8 @@
 
     function addMessage(type, content) { //adds a message to the output list
       var innerContent,
-          allContent;
+          allContent,
+          newMsg;
       content = (content.constructor == Array) ? content.join('') : content;
 
       innerContent = [
@@ -144,7 +151,7 @@
       allContent = ['<li class="', type, '">', innerContent, '</li>'].join('');
 
       if (outputList) {
-        var newMsg = document.createElement('LI');
+        newMsg = document.createElement('LI');
         newMsg.className = type;
         newMsg.innerHTML = innerContent;
         outputList.appendChild(newMsg);
@@ -177,7 +184,7 @@
     };
 
     function clickFilter(evt) { //show/hide a specific message type
-      var entry, span, type, filters, active, oneActiveFilter, i, spanType;
+      var entry, span, type, filters, active, oneActiveFilter, i, spanType, disabledTypes;
 
       if (!evt) {
         evt = window.event;
@@ -210,7 +217,7 @@
         }
 
         //build outputList's class from messageTypes object
-        var disabledTypes = [];
+        disabledTypes = [];
         for (type in messageTypes) {
           if (! messageTypes[type]) {
             disabledTypes.push(type);
@@ -304,13 +311,13 @@
       bbird.className = newClass.join(' ');
     };
 
-    var logger = function(messages) {
+    logger = function(messages) {
       addMessage("info", reduce(messages, function(str, msg, i) {
         return str + JSON.stringify(msg) + (i === messages.length - 1 ? "" : ", ");
       }, ""));
     }
-    var oldLog = videojs.log;
-    var history = videojs.log.history && videojs.log.history.slice();
+    oldLog = videojs.log;
+    history = videojs.log.history && videojs.log.history.slice();
     videojs.log = function() {
       var args = Array.prototype.slice.call(arguments);
       logger(args);
