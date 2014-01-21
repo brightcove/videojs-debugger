@@ -304,13 +304,16 @@
       bbird.className = newClass.join(' ');
     };
 
+    var logger = function(messages) {
+      addMessage("info", reduce(messages, function(str, msg, i) {
+        return str + JSON.stringify(msg) + (i === messages.length - 1 ? "" : ", ");
+      }, ""));
+    }
     var oldLog = videojs.log;
     var history = videojs.log.history && videojs.log.history.slice();
     videojs.log = function() {
       var args = Array.prototype.slice.call(arguments);
-      addMessage("info", reduce(args, function(str, arg, i) {
-        return str + JSON.stringify(arg) + (i === args.length - 1 ? "" : ", ");
-      }, ""));
+      logger(args);
 
       videojs.log.oldLog.apply(videojs, arguments);
     };
@@ -318,9 +321,7 @@
     if (history) {
       history.forEach(function(arrgs) {
         var args = Array.prototype.slice.call(arrgs);
-        addMessage("info", reduce(args, function(str, arg, i) {
-          return str + JSON.stringify(arg) + (i === args.length - 1 ? "" : ", ");
-        }, ""));
+        logger(args);
       });
     }
 
