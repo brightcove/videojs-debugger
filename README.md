@@ -5,6 +5,7 @@
 1. Include `bootstrap.js` in after `video.js`
 2. Include `debugger.css`
 3. Initialize the debugger:
+
 ```js
 var player = videojs('video');
 player.debuggerWindow();
