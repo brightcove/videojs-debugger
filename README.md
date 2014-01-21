@@ -25,6 +25,23 @@ The debugger is loaded on demand via a certain trigger.
 * `js`: The url to the debugger script
 * `css`: The url to the debugger stylesheet
 
+## Usage
+
+`videojs.log`
+
+Once the the plugin gets loaded, there are several extra logging methods available for use.
+### Available always
+* `videojs.log.debug` - Adds a `debug` message
+* `videojs.log.warn` - Adds a `warn` message
+* `videojs.log.info` - Adds an `info` message. This one is equivalent to `videojs.log` itself
+* `videojs.log.error` - Adds an `error` message
+
+### Available after the debugger has been opened
+* `videojs.log.resize` - Toggles the size of the debugger window
+* `videojs.log.clear` - Clears the current output in the debugger window
+* `videojs.log.move` - Moves the debugger window to the next corner
+* `videojs.log.profile` - Adds a <code>profile</code> message
+
 ## Known issues
 
 * Email: To test emailing the log, you will need to supply a recipient's email address when your email client opens.
