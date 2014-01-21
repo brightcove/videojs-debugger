@@ -11,10 +11,10 @@ var player = videojs('video');
 player.debuggerWindow({ url: "src/js/debugger.js" });
 ```
 
-## F12 or Triple Tap to open debugger
+## F2 or Triple Tap to open debugger
 
 The debugger is loaded on demand via a certain trigger.
-* On desktops, the trigger is *`<F12>`*.
+* On desktops, the trigger is *`<F2>`*.
 * On mobile devices, the trigger is a *`three finger tap`*
 
 ## Options
