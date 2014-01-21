@@ -21,39 +21,34 @@
       profiler = {},
       currentTime,
 
-    IDs = {
-      blackbird: 'blackbird',
-      filters: 'bbFilters',
-      controls: 'bbControls',
-      size: 'bbSize',
-      sendEmail: 'sendEmail'
-    },
-    messageTypes = { //order of these properties imply render order of filter controls
-      debug: true,
-      info: true,
-      warn: true,
-      error: true,
-      profile: true
-    };
+      IDs = {
+        blackbird: 'blackbird',
+        filters: 'bbFilters',
+        controls: 'bbControls',
+        size: 'bbSize',
+        sendEmail: 'sendEmail'
+      },
 
-    function returnCurrentTime() {
-      var month, day, minutes, seconds;
-      currentTime = new Date();
-      month = currentTime.getMonth() + 1;
-      if(month < 10) { month = "0" + month };
-      day = currentTime.getDay();
-      if(day < 10) { day = "0" + day };
-      minutes = currentTime.getMinutes();
-      seconds = currentTime.getSeconds();
-      if(minutes < 10) { minutes = "0" + minutes; }
-      if(seconds < 10) { seconds = "0" + seconds; }
+      messageTypes = { //order of these properties imply render order of filter controls
+        debug: true,
+        info: true,
+        warn: true,
+        error: true,
+        profile: true
+      };
 
-      return currentTime.getFullYear() +"-" +
-             month + "-" +
-             day + " " +
-             currentTime.getHours() + ":" +
-             minutes + ":" +
-             seconds + " ";
+    function pad(s, n) {
+      return ((new Array(n+1)).join('0') + s).slice(-1*n);
+    }
+    function timeString() {
+      var d = new Date();
+      return [
+        '[',
+        [pad(d.getDate(), 2), pad(d.getMonth() + 1, 2)].join('/'),
+        ' ',
+        [pad(d.getHours(), 2), pad(d.getMinutes(), 2), pad(d.getSeconds(), 2)].join(':'),
+        ']',
+      ].join('');
     };
 
     function generateMarkup() { //build markup
@@ -101,17 +96,28 @@
     };
 
     function addMessage(type, content) { //adds a message to the output list
+      var innerContent,
+          allContent;
       content = (content.constructor == Array) ? content.join('') : content;
+
+      innerContent = [
+        '<span class="icon"></span>',
+        timeString(),
+        content
+      ].join(' ');
+
+      allContent = ['<li class="', type, '">', innerContent, '</li>'].join('');
+
       if (outputList) {
         var newMsg = document.createElement('LI');
         newMsg.className = type;
-        newMsg.innerHTML = [ '<span class="icon"></span>', returnCurrentTime(), content ].join( '' )
+        newMsg.innerHTML = innerContent;
         outputList.appendChild(newMsg);
         scrollToBottom();
       } else {
-        cache.push(['<li class="', type, '"><span class="icon"></span>', returnCurrentTime(),  content, '</li>'].join(''));
+        cache.push(allContent);
       }
-      emailArray.push(['<li class="', type, '"><span class="icon"></span>', returnCurrentTime(),  content, '</li>'].join(''));
+      emailArray.push(allContent);
     };
 
     function clear() { //clear list output
