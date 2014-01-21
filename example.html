@@ -33,18 +33,8 @@
 
 <script>
   var player = videojs("video", {}, function() {
-    videojs.log("player loaded");
-  }),
-  counter = 0,
-  logger;
+    videojs.log("player loaded", this.currentSrc());
+  });
 
-player.debuggerWindow({ url: "src/js/debugger.js" });
-
-logger = setInterval(function() {
-  videojs.log(counter++);
-  if (counter > 100) {
-    clearInterval(logger);
-  }
-}, 1000)
-
+  player.debuggerWindow({ url: "src/js/debugger.js" });
 </script>

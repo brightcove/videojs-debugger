@@ -4,6 +4,25 @@
       readKey,
       readGesture;
 
+  function filter(arr, callback, context) {
+    var
+      result = [],
+      value,
+      i = 0,
+      l = arr.length;
+
+    for (; i < l; i++) {
+      if (arr.hasOwnProperty(i)) {
+        value = arr[i];
+        if (callback.call(context, value, i, arr)) {
+          result.push(value);
+        }
+      }
+    }
+
+    return result;
+  }
+
   //event management (thanks John Resig)
   function addEvent(obj, type, fn) {
     var obj = (obj.constructor === String) ? document.getElementById(obj) : obj;
@@ -75,7 +94,10 @@
   }
 
   videojs.plugin("debuggerWindow", function(opts) {
-    var events = getEvents(loadDebugger);
+    var events = getEvents(loadDebugger),
+        videoEvents = filter(videojs.Html5.Events, function(event) { return event !== 'timeupdate' && event !== "progress"; }),
+        i = videoEvents.length,
+        eventHandlerFunction;
 
     options = opts;
     player = this;
@@ -90,5 +112,16 @@
     });
 
     player.debuggerWindow.getEvents = getEvents;
+
+    eventHandlerFunction = function(event) {
+      videojs.log({
+        type: event.type,
+        time: new Date()
+      });
+    };
+
+    while (i--) {
+      player.on(videoEvents[i], eventHandlerFunction);
+    }
   });
 })(videojs, window);
