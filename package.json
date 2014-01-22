@@ -1,6 +1,6 @@
 {
   "name": "videojs-debugger",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A debugger for videojs",
   "main": "src/js/bootstrap.js",
   "repository": {
