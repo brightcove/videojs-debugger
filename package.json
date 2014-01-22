@@ -1,0 +1,13 @@
+{
+  "name": "videojs-debugger",
+  "version": "0.1.0",
+  "description": "A debugger for videojs",
+  "main": "src/js/bootstrap.js",
+  "repository": {
+    "type": "git",
+    "url": "git@bithub.brightcove.com:videocloud/videojs-debugger.git"
+  },
+  "author": "",
+  "license": "Apache 2.0",
+  "readmeFilename": "README.md"
+}
