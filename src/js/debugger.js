@@ -149,6 +149,8 @@
         content
       ].join(' ');
 
+      console.log(timeString(), content);
+
       allContent = ['<li class="', type, '">', innerContent, '</li>'].join('');
 
       if (outputList) {
@@ -314,7 +316,13 @@
 
     logger = function(type, messages) {
       addMessage(type, reduce(messages, function(str, msg, i) {
-        return str + JSON.stringify(msg) + (i === messages.length - 1 ? "" : ", ");
+        var sMsg;
+        try {
+          sMsg = JSON.stringify(msg);
+        } catch (e) {
+          sMsg = msg.toString();
+        }
+        return str + sMsg + (i === messages.length - 1 ? "" : ", ");
       }, ""));
     };
     historyLogger = function(type, messages) {
@@ -340,10 +348,10 @@
     videojs.log.resize = function() { resize(); };
     videojs.log.clear = function() { clear(); };
     videojs.log.move = function() { reposition(); };
-    videojs.log.debug = function(msg) { addMessage('debug', msg); };
-    videojs.log.warn = function(msg) { addMessage('warn', msg); };
+    videojs.log.debug = function() { logger('debug', arguments); };
+    videojs.log.warn = function() { logger('warn', arguments); };
     videojs.log.info = videojs.log;
-    videojs.log.error = function(msg) { addMessage('error', msg); };
+    videojs.log.error = function() { logger('error', arguments); };
     videojs.log.profile = function(label) {
       currentTime = new Date(); //record the current time when profile() is executed
       if (label == undefined || label == '') {
