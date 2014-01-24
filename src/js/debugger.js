@@ -86,7 +86,7 @@
       var d = new Date();
       return [
         '[',
-        [pad(d.getDate(), 2), pad(d.getMonth() + 1, 2)].join('/'),
+        [pad(d.getMonth() + 1, 2), pad(d.getDate(), 2)].join('/'),
         ' ',
         [pad(d.getHours(), 2), pad(d.getMinutes(), 2), pad(d.getSeconds(), 2)].join(':'),
         ']',
