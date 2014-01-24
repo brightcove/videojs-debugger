@@ -117,6 +117,7 @@
     });
 
     player.debuggerWindow.getEvents = getEvents;
+    player.debuggerWindow.loadDebugger = loadDebugger;
 
     function makeCachedLogger() {
       function logger() {

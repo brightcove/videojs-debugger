@@ -384,6 +384,8 @@
     resize(state.size);
     reposition(state.pos);
     show();
+    this.debuggerWindow.show = show;
+    this.debuggerWindow.hide = hide;
 
     scrollToBottom();
 
