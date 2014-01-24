@@ -315,7 +315,7 @@
     };
 
     logger = function(type, messages) {
-      addMessage(type, reduce(messages, function(str, msg, i) {
+      addMessage(type, reduce((messages || []), function(str, msg, i) {
         var sMsg;
         try {
           sMsg = JSON.stringify(msg);
@@ -326,7 +326,7 @@
       }, ""));
     };
     historyLogger = function(type, messages) {
-      messages.forEach(function(arrgs) {
+      (messages || []).forEach(function(arrgs) {
         var args = Array.prototype.slice.call(arrgs);
         logger(type, args);
       });
