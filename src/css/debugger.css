@@ -114,11 +114,16 @@
   content: "\f065";
 }
 
+#blackbird .header,
+#blackbird .main,
+#blackbird .footer {
+  border-left: solid #F4F4F4 3px;
+  border-right: solid #F4F4F4 3px;
+}
+
 #blackbird .header {
   background-color: #000;
   border-top: solid #F4F4F4 3px;
-  border-left: solid #F4F4F4 3px;
-  border-right: solid #F4F4F4 3px;
   height: 40px;
   float: left;
   width: 272px;
@@ -152,8 +157,6 @@
 }
 
 #blackbird .main {
-  border-right: solid #F4F4F4 3px;
-  border-left: solid #F4F4F4 3px;
   background-color: #0E0E0E;
   margin: 0 14px 0 8px;
   float: left;
@@ -198,8 +201,6 @@
 #blackbird .footer {
   background-color: #0E0E0E;
   border-bottom: solid #F4F4F4 3px;
-  border-left: solid #F4F4F4 3px;
-  border-right: solid #F4F4F4 3px;
   height: 10px;
   float: left;
   width: 272px;
