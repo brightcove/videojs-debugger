@@ -129,6 +129,7 @@
 #blackbird .header {
   background-color: #000;
   border-top: solid #F4F4F4 3px;
+  border-bottom: solid #333 1px;
   height: 40px;
   float: left;
   width: 272px;
@@ -178,16 +179,15 @@
 }
 
 #blackbird .main ol li {
-  padding: 1px 4px 1px 30px;
+  padding: 1px 4px 1px 20px;
   border-bottom:  1px solid #333;
   color: #CCC;
   margin:  2px 2px;
 }
 
 #blackbird .main ol li span {
-  border:  1px solid #333;
   display: block;
-  margin:  -2px 0 1px -25px;
+  margin-left: -18px;
 }
 
 #blackbird .main ol li.profile {
@@ -206,6 +206,7 @@
 #blackbird .footer {
   background-color: #0E0E0E;
   border-bottom: solid #F4F4F4 3px;
+  border-top: solid #333 1px;
   height: 10px;
   float: left;
   width: 272px;
