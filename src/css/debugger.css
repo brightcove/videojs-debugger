@@ -101,6 +101,10 @@
   content: "\f017";
 }
 
+#blackbird span.fa.email:before {
+  content: "\f003";
+}
+
 #blackbird span.fa.close:before {
   content: "\f00d";
 }
@@ -151,7 +155,7 @@
 }
 
 #blackbird .header .right .controls span {
-  margin: 0;
+  margin: 0 4px;
 }
 
 #blackbird .header .right .controls span.clear {
