@@ -118,9 +118,7 @@
           '</div>',
         '</div>',
         '<div class="main">',
-          '<div class="mainBody">',
-            '<ol>', cache.join(''), '</ol>',
-          '</div>',
+          '<ol>', cache.join(''), '</ol>',
         '</div>',
         '<div class="footer">',
         '</div>'

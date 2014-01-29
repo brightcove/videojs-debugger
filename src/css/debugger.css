@@ -33,11 +33,8 @@
   width: 300px;
 }
 
-#blackbird.bbSmall .main div {
+#blackbird.bbSmall .main {
   height: 200px;
-}
-
-#blackbird.bbSmall .main div.mainBody {
   width: 272px;
 }
 
@@ -49,13 +46,13 @@
   width: 336px;
 }
 
-#blackbird.bbLarge .main div {
+#blackbird.bbLarge .main {
   height: 500px;
 }
 
 #blackbird.bbLarge .header,
 #blackbird.bbLarge .footer,
-#blackbird.bbLarge .main div.mainBody {
+#blackbird.bbLarge .main {
   width: 472px;
 }
 
@@ -154,7 +151,7 @@
   margin-right: 10px;
 }
 
-#blackbird .main .mainBody {
+#blackbird .main {
   border-right: solid #F4F4F4 3px;
   border-left: solid #F4F4F4 3px;
   background-color: #141414;
@@ -162,7 +159,7 @@
   float: left;
 }
 
-#blackbird .main .mainBody ol {
+#blackbird .main ol {
   line-height:  1.45;
   height: 100%;
   overflow: auto;
@@ -172,20 +169,20 @@
   padding: 0;
 }
 
-#blackbird .main .mainBody ol li {
+#blackbird .main ol li {
   padding: 1px 4px 1px 30px;
   border-bottom:  1px solid #333;
   color: #CCC;
   margin:  2px 2px;
 }
 
-#blackbird .main .mainBody ol li span {
+#blackbird .main ol li span {
   border:  1px solid #333;
   display: block;
   margin:  -2px 0 1px -25px;
 }
 
-#blackbird .main .mainBody ol li.profile {
+#blackbird .main ol li.profile {
   color: #DDD;
   font-style: italic;
 }
