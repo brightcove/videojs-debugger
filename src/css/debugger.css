@@ -33,11 +33,6 @@
   width: 300px;
 }
 
-#blackbird.bbSmall .header div.left,
-#blackbird.bbSmall .footer div.left {
-  width: 150px;
-}
-
 #blackbird.bbSmall .main div {
   height: 200px;
 }
@@ -50,15 +45,16 @@
   width: 500px;
 }
 
-#blackbird.bbLarge .header div.left,
-#blackbird.bbLarge .footer div.left {
-  width: 350px;
+#blackbird.bbLarge .header div.left {
+  width: 336px;
 }
 
 #blackbird.bbLarge .main div {
   height: 500px;
 }
 
+#blackbird.bbLarge .header,
+#blackbird.bbLarge .footer,
 #blackbird.bbLarge .main div.mainBody {
   width: 472px;
 }
@@ -121,58 +117,49 @@
   content: "\f065";
 }
 
-#blackbird .header > div,
-#blackbird .main > div,
-#blackbird .footer > div {
-  background-image: url(../img/debugger_panel.png);
-  background-repeat: no-repeat;
+#blackbird .header {
+  background-color: #000;
+  border-top: solid #F4F4F4 3px;
+  border-left: solid #F4F4F4 3px;
+  border-right: solid #F4F4F4 3px;
+  height: 40px;
+  float: left;
+  width: 272px;
+  margin: 8px 8px 0 8px;
+  border-radius: 10px 10px 0 0;
+  float: left;
 }
 
-#blackbird .header div {
+#blackbird .header div.left,
+#blackbird .header div.right {
   float: left;
+  width: 136px;
 }
 
 #blackbird .header div.left {
   background-position: top left;
-  height: 40px;
 }
 
 #blackbird .header .left div.filters {
-  margin-left:  -4px;
-  padding: 16px 0 0 19px;
+  padding: 10px 0 0 10px;
   float: left;
-}
-
-#blackbird .header div.right {
-  background-position: top right;
-  height: 40px;
-  width: 150px;
 }
 
 #blackbird .header .right div.controls {
-  padding: 16px 24px 0 0;
+  padding: 10px 10px 0 0;
   float: right;
 }
 
-#blackbird .header .right .controls span {
-  margin: 0 4px;
-}
-
 #blackbird .header .right .controls span.clear {
-  margin-right: 8px;
+  margin-right: 10px;
 }
 
-#blackbird .main div {
+#blackbird .main .mainBody {
+  border-right: solid #F4F4F4 3px;
+  border-left: solid #F4F4F4 3px;
+  background-color: #141414;
+  margin: 0 14px 0 8px;
   float: left;
-}
-
-#blackbird .main div.left {
-  background-position: 0 -30px;
-  width: 11px;
-}
-
-#blackbird .main div.mainBody {
-  background-position: 40% -40px;
 }
 
 #blackbird .main .mainBody ol {
@@ -211,52 +198,14 @@
   display: none;
 }
 
-#blackbird .main div.right {
-  background: url(../img/debugger_panel.png) no-repeat 100% -30px;
-  width: 17px;
-}
-
-#blackbird .footer div {
-  height: 50px;
+#blackbird .footer {
+  background-color: #141414;
+  border-bottom: solid #F4F4F4 3px;
+  border-left: solid #F4F4F4 3px;
+  border-right: solid #F4F4F4 3px;
+  height: 10px;
   float: left;
+  width: 272px;
+  margin: 0 8px 0 8px;
+  border-radius: 0 0 10px 10px;
 }
-
-#blackbird .footer div.left {
-  background-position: bottom left;
-}
-
-#blackbird .footer div.left label {
-  display: block;
-  color: #BBB;
-  margin: 8px 0 0 16px;
-  position: relative;
-  font-family: Arial, sans-serif;
-}
-
-#blackbird .footer div.left label input {
-  padding: 0;vertical-align:middle;
-}
-
-#blackbird .footer div.right {
-  background-position: bottom right;
-  width: 150px;
-}
-
-#blackbird .footer div.right label {
-  display: block;
-  color: #BBB;
-  margin: 8px 0 0 16px;
-  position: relative;
-  font-family: Arial, sans-serif;
-}
-
-#blackbird .footer div.right label input {
-  padding: 0;
-  vertical-align: middle;
-}
-
-#blackbird .footer div.right {
-  background-position: bottom right;
-  width: 150px;
-}
-

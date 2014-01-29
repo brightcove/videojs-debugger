@@ -118,18 +118,11 @@
           '</div>',
         '</div>',
         '<div class="main">',
-          '<div class="left">',
-            '</div><div class="mainBody">',
-              '<ol>', cache.join(''), '</ol>',
-            '</div>',
-          '<div class="right">',
+          '<div class="mainBody">',
+            '<ol>', cache.join(''), '</ol>',
           '</div>',
         '</div>',
         '<div class="footer">',
-           '<div class="left">',
-           '</div>',
-           '<div class="right">',
-           '</div>',
         '</div>'
       ].join('');
       return newNode;
