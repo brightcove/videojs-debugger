@@ -66,7 +66,11 @@
   color: white;
 }
 
-#blackbird span.fa.disabled {
+#blackbird span.fa.error.disabled:before,
+#blackbird span.fa.warn.disabled:before,
+#blackbird span.fa.info.disabled:before,
+#blackbird span.fa.debug.disabled:before,
+#blackbird span.fa.profile.disabled:before {
   color: white;
 }
 
@@ -91,6 +95,7 @@
 }
 
 #blackbird span.fa.profile:before {
+  color: orange;
   content: "\f017";
 }
 
