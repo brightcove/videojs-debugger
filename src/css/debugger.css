@@ -63,70 +63,58 @@
   width: 472px;
 }
 
-#blackbird .header span {
+#blackbird span.fa {
   position: relative;
   width: 16px;
   height: 16px;
+  font-size: 16px;
   margin: 0 4px;
   float: left;
-  background-image: url(../img/debugger_icons.png);
-  background-repeat: no-repeat;
+  color: white;
 }
 
-#blackbird .header span.error {
-  background-position: 0px 0px;
+#blackbird span.fa.disabled {
+  color: white;
 }
 
-#blackbird .header span.errorDisabled {
-  background-position: -16px 0px;
+#blackbird span.fa.error:before {
+  color: red;
+  content: "\f057";
 }
 
-#blackbird .header span.warn {
-  background-position: 0px -16px;
+#blackbird span.fa.warn:before {
+  color: yellow;
+  content: "\f071";
 }
 
-#blackbird .header span.warnDisabled {
-  background-position: -16px -16px;
+#blackbird span.fa.info:before {
+  color: blue;
+  content: "\f05a";
 }
 
-#blackbird .header span.info {
-  background-position: 0px -32px;
+#blackbird span.fa.debug:before {
+  color: green;
+  content: "\f14a";
 }
 
-#blackbird .header span.infoDisabled {
-  background-position: -16px -32px;
+#blackbird span.fa.profile:before {
+  content: "\f017";
 }
 
-#blackbird .header span.debug {
-  background-position: 0px -48px;
+#blackbird span.fa.close:before {
+  content: "\f00d";
 }
 
-#blackbird .header span.debugDisabled {
-  background-position: -16px -48px;
+#blackbird span.fa.clear:before {
+  content: "\f014";
 }
 
-#blackbird .header span.profile {
-  background-position: 0px -64px;
+#blackbird span.fa.small:before {
+  content: "\f066";
 }
 
-#blackbird .header span.profileDisabled {
-  background-position: -16px -64px;
-}
-
-#blackbird .header span.close {
-  background-position: 0px -80px;
-}
-
-#blackbird .header span.clear {
-  background-position: -16px -80px;
-}
-
-#blackbird .header span.small {
-  background-position: 0px -96px;
-}
-
-#blackbird .header span.large {
-  background-position: -16px -96px;
+#blackbird span.fa.large:before {
+  content: "\f065";
 }
 
 #blackbird .header > div,
@@ -201,33 +189,9 @@
 }
 
 #blackbird .main .mainBody ol li span {
-  background: url(../img/debugger_icons.png) no-repeat 0 0;
   border:  1px solid #333;
-  height: 16px;
-  width: 16px;
   display: block;
-  float: left;
   margin:  -2px 0 1px -25px;
-}
-
-#blackbird .main .mainBody ol li.error span {
-  background-position: 0 0;
-}
-
-#blackbird .main .mainBody ol li.warn span {
-  background-position: 0 -16px;
-}
-
-#blackbird .main .mainBody ol li.info span {
-  background-position: 0 -32px;
-}
-
-#blackbird .main .mainBody ol li.debug span {
-  background-position: 0 -48px;
-}
-
-#blackbird .main .mainBody ol li.profile span {
-  background-position: 0 -64px;
 }
 
 #blackbird .main .mainBody ol li.profile {
