@@ -96,7 +96,7 @@
     function generateMarkup() { //build markup
       var type, spans = [];
       for (type in messageTypes) {
-        spans.push(['<span class="', type, '" type="', type, '"></span>'].join(''));
+        spans.push(['<span class="', type, '" type="', type, '" title="hide ', type, ' messages"></span>'].join(''));
       }
 
       var newNode = document.createElement('DIV');
@@ -105,7 +105,7 @@
       newNode.innerHTML = [
         '<div class="header">',
           '<div class="left">',
-            '<div id="', IDs.filters, '" class="filters" title="click to filter by message type">', spans.join(''),
+            '<div id="', IDs.filters, '" class="filters">', spans.join(''),
             '</div>',
           '</div>',
           '<div class="right">',
@@ -144,7 +144,7 @@
       content = (content.constructor == Array) ? content.join('') : content;
 
       innerContent = [
-        '<span class="icon"></span>',
+        '<span class="icon" title="' + type + '"></span>',
         timeString(),
         content
       ].join(' ');
