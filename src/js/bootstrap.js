@@ -76,7 +76,8 @@
 
   function loadDebugger() {
     var s = document.createElement('script'),
-        l = document.createElement('link'),
+        debuggerStyle = document.createElement('link'),
+        fontawesome = document.createElement('link'),
         loaded = false;
 
     s.onload = s.onreadystatechange = function() {
@@ -91,11 +92,14 @@
 
     s.src = options.js || "debugger.js";
 
-    l.rel = "stylesheet";
-    l.href = options.css || "debugger.css";
+    debuggerStyle.rel = "stylesheet";
+    fontawesome.rel = "stylesheet";
+    debuggerStyle.href = options.css || "debugger.css";
+    fontawesome.href = "//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css";
 
     document.body.appendChild(s);
-    document.body.appendChild(l);
+    document.body.appendChild(debuggerStyle);
+    document.body.appendChild(fontawesome);
   }
 
   videojs.plugin("debuggerWindow", function(opts) {

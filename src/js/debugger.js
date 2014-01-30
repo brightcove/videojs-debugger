@@ -1,7 +1,7 @@
 /*
-  Originally based on Blackbird
-  MIT License - Copyright (c) Blackbird Project <http://blackbirdjs.googlecode.com/>
-*/
+ * Originally based on Blackbird
+ * MIT License - Copyright (c) Blackbird Project <http://blackbirdjs.googlecode.com/>
+ */
 (function(videojs, window, undefined) {
   'use strict';
 
@@ -53,7 +53,7 @@
         pos: 1,
         size: 0
       },
-      classes = {},
+      classes = [],
       profiler = {},
       currentTime,
       readKey,
@@ -96,7 +96,7 @@
     function generateMarkup() { //build markup
       var type, spans = [];
       for (type in messageTypes) {
-        spans.push(['<span class="', type, '" type="', type, '" title="hide ', type, ' messages"></span>'].join(''));
+        spans.push(['<span class="fa ', type, '" type="', type, '" title="hide ', type, ' messages"></span>'].join(''));
       }
 
       var newNode = document.createElement('DIV');
@@ -110,28 +110,17 @@
           '</div>',
           '<div class="right">',
             '<div id="', IDs.controls, '" class="controls">',
+              '<span class="fa email" id="', IDs.sendEmail, '" title="Send log via email" op="email"></span>',
               '<span id="', IDs.size ,'" title="contract" op="resize"></span>',
-              '<span class="clear" title="clear" op="clear"></span>',
-              '<span class="close" title="close" op="close"></span>',
+              '<span class="fa clear" title="clear" op="clear"></span>',
+              '<span class="fa close" title="close" op="close"></span>',
             '</div>',
           '</div>',
         '</div>',
         '<div class="main">',
-          '<div class="left">',
-            '</div><div class="mainBody">',
-              '<ol>', cache.join(''), '</ol>',
-            '</div>',
-          '<div class="right">',
-          '</div>',
+          '<ol>', cache.join(''), '</ol>',
         '</div>',
         '<div class="footer">',
-           '<div class="left">',
-             '<label for="', IDs.sendEmail, '">',
-               '<input type="button" id="', IDs.sendEmail, '" />Email Debugger Log',
-             '</label>',
-           '</div>',
-           '<div class="right">',
-           '</div>',
         '</div>'
       ].join('');
       return newNode;
@@ -144,7 +133,7 @@
       content = (content.constructor == Array) ? content.join('') : content;
 
       innerContent = [
-        '<span class="icon" title="' + type + '"></span>',
+        '<span class="fa ' + type + '" title="' + type + '"></span>',
         timeString(),
         content
       ].join(' ');
@@ -210,13 +199,13 @@
           for (i = 0; filters[i]; i++) {
             spanType = filters[i].getAttributeNode('type').nodeValue;
 
-            filters[i].className = (oneActiveFilter || (spanType == type)) ? spanType : spanType + 'Disabled';
+            filters[i].className = 'fa ' + spanType + ((oneActiveFilter || (spanType == type)) ? '' : ' disabled');
             messageTypes[spanType] = oneActiveFilter || (spanType == type);
           }
         }
         else {
           messageTypes[type] = ! messageTypes[type];
-          span.className = (messageTypes[type]) ? type : type + 'Disabled';
+          span.className = 'fa ' + type + ((messageTypes[type]) ? '' : ' disabled');
         }
 
         //build outputList's class from messageTypes object
@@ -296,7 +285,7 @@
 
       span = document.getElementById(IDs.size);
       span.title = (size === 1) ? 'small' : 'large';
-      span.className = span.title;
+      span.className = "fa " + span.title;
 
       state.size = size;
       setState();
@@ -304,14 +293,11 @@
     };
 
     function setState() {
-      var word,
-          newClass = [];
-
-      for (word in classes) {
-        newClass.push(classes[word]);
+      var touchClass = "";
+      if (videojs.TOUCH_ENABLED) {
+        touchClass = 'vjs-touch ';
       }
-
-      bbird.className = newClass.join(' ');
+      bbird.className = touchClass + classes.join(' ');
     };
 
     logger = function(type, messages) {
