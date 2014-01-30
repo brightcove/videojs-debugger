@@ -53,7 +53,7 @@
         pos: 1,
         size: 0
       },
-      classes = {},
+      classes = [],
       profiler = {},
       currentTime,
       readKey,
@@ -293,14 +293,7 @@
     };
 
     function setState() {
-      var word,
-          newClass = [];
-
-      for (word in classes) {
-        newClass.push(classes[word]);
-      }
-
-      bbird.className = newClass.join(' ');
+      bbird.className = classes.join(' ');
     };
 
     logger = function(type, messages) {
