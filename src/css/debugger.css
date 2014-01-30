@@ -36,7 +36,7 @@
   width: 300px;
 }
 #blackbird.vjs-touch.bbSmall {
-  width: 448px;
+  width: 458px;
 }
 
 #blackbird.bbSmall .main {
@@ -45,15 +45,23 @@
 }
 #blackbird.vjs-touch.bbSmall .main {
   height: 300px;
-  width: 420px;
+  width: 430px;
 }
 
 #blackbird.bbLarge {
   width: 500px;
 }
+#blackbird.vjs-touch.bbLarge,
+#blackbird.vjs-touch.bbLarge .main {
+  width: 660px;
+}
 
 #blackbird.bbLarge .header .left {
   width: 336px;
+}
+#blackbird.vjs-touch.bbLarge .header .left,
+#blackbird.vjs-touch.bbLarge .header .right {
+  width: 316px;
 }
 
 #blackbird.bbLarge .main {
@@ -64,6 +72,11 @@
 #blackbird.bbLarge .footer,
 #blackbird.bbLarge .main {
   width: 472px;
+}
+#blackbird.vjs-touch.bbLarge .header,
+#blackbird.vjs-touch.bbLarge .footer,
+#blackbird.vjs-touch.bbLarge .main {
+  width: 632px;
 }
 
 
@@ -147,7 +160,7 @@
   background-color: #000;
   border-top: solid #F4F4F4 3px;
   border-bottom: solid #333 1px;
-  height: 40px;
+  height: 32px;
   float: left;
   width: 272px;
   margin: 14px 8px 0 8px;
@@ -155,7 +168,7 @@
   float: left;
 }
 #blackbird.vjs-touch .header {
-  width: 420px;
+  width: 430px;
   height: 50px;
 }
 
@@ -166,7 +179,7 @@
 }
 #blackbird.vjs-touch .header .left,
 #blackbird.vjs-touch .header .right {
-  width: 210px;
+  width: 215px;
 }
 
 #blackbird .header .left {
@@ -183,8 +196,13 @@
   float: right;
 }
 
+#blackbird .header .right .controls span.email,
 #blackbird .header .right .controls span.clear {
-  margin-right: 10px;
+  margin-right: 15px;
+}
+#blackbird.vjs-touch .header .right .controls span.email,
+#blackbird.vjs-touch .header .right .controls span.clear {
+  margin-right: 25px;
 }
 
 #blackbird .main {
@@ -245,5 +263,5 @@
   border-radius: 0 0 10px 10px;
 }
 #blackbird.vjs-touch .footer {
-  width: 420px;
+  width: 430px;
 }
