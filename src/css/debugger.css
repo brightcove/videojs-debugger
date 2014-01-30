@@ -106,47 +106,47 @@
 
 #blackbird span.fa.error:before {
   color: red;
-  content: "\f057";
+  content: "\f057"; /* fa-times-circle */
 }
 
 #blackbird span.fa.warn:before {
   color: yellow;
-  content: "\f071";
+  content: "\f071"; /* fa-exclamation-triangle */
 }
 
 #blackbird span.fa.info:before {
   color: blue;
-  content: "\f05a";
+  content: "\f05a"; /* fa-info-circle */
 }
 
 #blackbird span.fa.debug:before {
   color: green;
-  content: "\f14a";
+  content: "\f14a"; /* fa-check-square */
 }
 
 #blackbird span.fa.profile:before {
   color: orange;
-  content: "\f017";
+  content: "\f017"; /* fa-clock-o */
 }
 
 #blackbird span.fa.email:before {
-  content: "\f003";
+  content: "\f003"; /* fa-envelope-o */
 }
 
 #blackbird span.fa.close:before {
-  content: "\f00d";
+  content: "\f00d"; /* fa-envelope-o */
 }
 
 #blackbird span.fa.clear:before {
-  content: "\f014";
+  content: "\f014"; /* fa-trash-o */
 }
 
 #blackbird span.fa.small:before {
-  content: "\f066";
+  content: "\f066"; /* fa-compress */
 }
 
 #blackbird span.fa.large:before {
-  content: "\f065";
+  content: "\f065"; /* fa-expand */
 }
 
 #blackbird .header,
