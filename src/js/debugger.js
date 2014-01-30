@@ -293,7 +293,11 @@
     };
 
     function setState() {
-      bbird.className = classes.join(' ');
+      var touchClass = "";
+      if (videojs.TOUCH_ENABLED) {
+        touchClass = 'vjs-touch ';
+      }
+      bbird.className = touchClass + classes.join(' ');
     };
 
     logger = function(type, messages) {
