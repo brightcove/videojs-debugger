@@ -53,7 +53,7 @@
         pos: 1,
         size: 0
       },
-      classes = {},
+      classes = [],
       profiler = {},
       currentTime,
       readKey,
@@ -293,14 +293,11 @@
     };
 
     function setState() {
-      var word,
-          newClass = [];
-
-      for (word in classes) {
-        newClass.push(classes[word]);
+      var touchClass = "";
+      if (videojs.TOUCH_ENABLED) {
+        touchClass = 'vjs-touch ';
       }
-
-      bbird.className = newClass.join(' ');
+      bbird.className = touchClass + classes.join(' ');
     };
 
     logger = function(type, messages) {
