@@ -36,7 +36,7 @@
   width: 300px;
 }
 #blackbird.vjs-touch.bbSmall {
-  width: 458px;
+  width: 528px;
 }
 
 #blackbird.bbSmall .main {
@@ -45,7 +45,7 @@
 }
 #blackbird.vjs-touch.bbSmall .main {
   height: 300px;
-  width: 430px;
+  width: 500px;
 }
 
 #blackbird.bbLarge {
@@ -94,6 +94,7 @@
   width: 32px;
   height: 32px;
   font-size: 32px;
+  margin: 0 8px;
 }
 
 #blackbird span.fa.error.disabled:before,
@@ -168,7 +169,7 @@
   float: left;
 }
 #blackbird.vjs-touch .header {
-  width: 430px;
+  width: 500px;
   height: 50px;
 }
 
@@ -179,7 +180,7 @@
 }
 #blackbird.vjs-touch .header .left,
 #blackbird.vjs-touch .header .right {
-  width: 215px;
+  width: 250px;
 }
 
 #blackbird .header .left {
@@ -263,5 +264,5 @@
   border-radius: 0 0 10px 10px;
 }
 #blackbird.vjs-touch .footer {
-  width: 430px;
+  width: 500px;
 }
