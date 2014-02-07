@@ -130,12 +130,13 @@
     function addMessage(type, content) { //adds a message to the output list
       var innerContent,
           allContent,
+          timeStr = timeString(),
           newMsg;
       content = (content.constructor == Array) ? content.join('') : content;
 
       innerContent = [
         '<span class="fa ' + type + '" title="' + type + '"></span>',
-        timeString(),
+        timeStr,
         content
       ].join(' ');
 
@@ -150,7 +151,7 @@
       } else {
         cache.push(allContent);
       }
-      emailArray.push(allContent);
+      emailArray.push([timeStr, ' ', type, ': ', content].join(''));
     };
 
     function clear() { //clear list output
@@ -227,7 +228,7 @@
         evt = window.event;
       }
       el = (evt.target) ? evt.target : evt.srcElement;
-      window.open('mailto:email@example.com?subject=Brightcove Player Debugger Log&body=' + emailArray);
+      window.open('mailto:email@example.com?subject=Brightcove Player Debugger Log&body=' + encodeURIComponent(emailArray.join('\n')));
     };
 
     function scrollToBottom() { //scroll list output to the bottom
