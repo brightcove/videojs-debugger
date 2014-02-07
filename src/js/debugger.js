@@ -42,9 +42,10 @@
   };
 
 
-  function debuggerWindow(options) {
+  function debuggerWindowMain(options) {
 
     var
+      player = this,
       bbird,
       outputList,
       cache = [],
@@ -129,16 +130,15 @@
     function addMessage(type, content) { //adds a message to the output list
       var innerContent,
           allContent,
+          timeStr = timeString(),
           newMsg;
       content = (content.constructor == Array) ? content.join('') : content;
 
       innerContent = [
         '<span class="fa ' + type + '" title="' + type + '"></span>',
-        timeString(),
+        timeStr,
         content
       ].join(' ');
-
-      console.log(timeString(), content);
 
       allContent = ['<li class="', type, '">', innerContent, '</li>'].join('');
 
@@ -151,7 +151,7 @@
       } else {
         cache.push(allContent);
       }
-      emailArray.push(allContent);
+      emailArray.push([timeStr, ' ', type, ': ', content].join(''));
     };
 
     function clear() { //clear list output
@@ -228,7 +228,7 @@
         evt = window.event;
       }
       el = (evt.target) ? evt.target : evt.srcElement;
-      window.open('mailto:email@example.com?subject=Brightcove Player Debugger Log&body=' + emailArray);
+      window.open('mailto:email@example.com?subject=Brightcove Player Debugger Log&body=' + encodeURIComponent(emailArray.join('\n')));
     };
 
     function scrollToBottom() { //scroll list output to the bottom
@@ -255,7 +255,7 @@
       } else {
         show();
       }
-    }
+    };
 
     //sets the position
     function reposition(position) {
@@ -357,7 +357,7 @@
     bbird = document.body.appendChild(generateMarkup());
     outputList = bbird.getElementsByTagName('OL')[0];
 
-    events = events(toggleVisibility);
+    events = (events || player.debuggerWindow.events)(toggleVisibility);
     readKey = events.readKey;
     readGesture = events.readGesture;
 
@@ -370,8 +370,8 @@
     resize(state.size);
     reposition(state.pos);
     show();
-    this.debuggerWindow.show = show;
-    this.debuggerWindow.hide = hide;
+    this.debuggerWindowMain.show = show;
+    this.debuggerWindowMain.hide = hide;
 
     scrollToBottom();
 
@@ -384,5 +384,5 @@
     });
   };
 
-  videojs.plugin('debuggerWindow', debuggerWindow);
+  videojs.plugin('debuggerWindowMain', debuggerWindowMain);
 })(videojs, window);
