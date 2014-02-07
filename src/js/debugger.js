@@ -42,9 +42,10 @@
   };
 
 
-  function debuggerWindow(options) {
+  function debuggerWindowMain(options) {
 
     var
+      player = this,
       bbird,
       outputList,
       cache = [],
@@ -137,8 +138,6 @@
         timeString(),
         content
       ].join(' ');
-
-      console.log(timeString(), content);
 
       allContent = ['<li class="', type, '">', innerContent, '</li>'].join('');
 
@@ -255,7 +254,7 @@
       } else {
         show();
       }
-    }
+    };
 
     //sets the position
     function reposition(position) {
@@ -357,7 +356,7 @@
     bbird = document.body.appendChild(generateMarkup());
     outputList = bbird.getElementsByTagName('OL')[0];
 
-    events = events(toggleVisibility);
+    events = (events || player.debuggerWindow.events)(toggleVisibility);
     readKey = events.readKey;
     readGesture = events.readGesture;
 
@@ -370,8 +369,8 @@
     resize(state.size);
     reposition(state.pos);
     show();
-    this.debuggerWindow.show = show;
-    this.debuggerWindow.hide = hide;
+    this.debuggerWindowMain.show = show;
+    this.debuggerWindowMain.hide = hide;
 
     scrollToBottom();
 
@@ -384,5 +383,5 @@
     });
   };
 
-  videojs.plugin('debuggerWindow', debuggerWindow);
+  videojs.plugin('debuggerWindowMain', debuggerWindowMain);
 })(videojs, window);

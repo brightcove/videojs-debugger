@@ -75,6 +75,10 @@
   }
 
   function loadDebugger() {
+    if (player.debuggerWindowMain) {
+      return;
+    }
+
     var s = document.createElement('script'),
         debuggerStyle = document.createElement('link'),
         fontawesome = document.createElement('link'),
@@ -84,8 +88,10 @@
       if (!loaded && (!this.readyState || this.readyState === 'loaded' || this.readyState === 'complete')) {
         loaded = true;
         s.onload = s.onreadystatechange = null;
+        loadDebugger = function(){};
 
-        player.debuggerWindow();
+        player.debuggerWindow.getEvents;
+        player.debuggerWindowMain();
         unbindEvents();
       }
     };
