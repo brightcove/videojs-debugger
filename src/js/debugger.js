@@ -21,7 +21,7 @@
 
   //event management (thanks John Resig)
   function addEvent(obj, type, fn) {
-    var obj = (obj.constructor === String) ? document.getElementById(obj) : obj;
+    obj = (obj.constructor === String) ? document.getElementById(obj) : obj;
     if (obj.attachEvent) {
       obj['e' + type + fn] = fn;
       obj[type + fn] = function(){ obj['e' + type + fn](window.event); };
@@ -29,22 +29,24 @@
     } else {
       obj.addEventListener(type, fn, false);
     }
-  };
+  }
 
   function removeEvent(obj, type, fn) {
-    var obj = (obj.constructor === String) ? document.getElementById(obj) : obj;
+    obj = (obj.constructor === String) ? document.getElementById(obj) : obj;
     if (obj.detachEvent) {
       obj.detachEvent('on' + type, obj[type + fn]);
       obj[type + fn] = null;
     } else {
       obj.removeEventListener(type, fn, false);
     }
-  };
+  }
 
 
   function debuggerWindowMain(options) {
 
     var
+
+      /* jshint -W040 */
       player = this,
       bbird,
       outputList,
@@ -92,7 +94,7 @@
         [pad(d.getHours(), 2), pad(d.getMinutes(), 2), pad(d.getSeconds(), 2)].join(':'),
         ']',
       ].join('');
-    };
+    }
 
     function generateMarkup() { //build markup
       var type, spans = [];
@@ -125,7 +127,7 @@
         '</div>'
       ].join('');
       return newNode;
-    };
+    }
 
     function addMessage(type, content) { //adds a message to the output list
       var innerContent,
@@ -152,11 +154,11 @@
         cache.push(allContent);
       }
       emailArray.push([timeStr, ' ', type, ': ', content].join(''));
-    };
+    }
 
     function clear() { //clear list output
       outputList.innerHTML = '';
-    };
+    }
 
     function clickControl(evt) {
       var el;
@@ -173,7 +175,7 @@
           case 'close':  hide();   break;
         }
       }
-    };
+    }
 
     function clickFilter(evt) { //show/hide a specific message type
       var entry, span, type, filters, active, oneActiveFilter, i, spanType, disabledTypes;
@@ -220,7 +222,7 @@
 
         scrollToBottom();
       }
-    };
+    }
 
     function clickSendEmail(evt) {
       var el;
@@ -229,11 +231,11 @@
       }
       el = (evt.target) ? evt.target : evt.srcElement;
       window.open('mailto:email@example.com?subject=Brightcove Player Debugger Log&body=' + encodeURIComponent(emailArray.join('\n')));
-    };
+    }
 
     function scrollToBottom() { //scroll list output to the bottom
       outputList.scrollTop = outputList.scrollHeight;
-    };
+    }
 
     function isVisible() { //determine the visibility
       return (bbird.style.display == 'block');
@@ -241,13 +243,13 @@
 
     function hide() {
       bbird.style.display = 'none';
-    };
+    }
 
     function show() {
       document.body.removeChild(bbird);
       document.body.appendChild(bbird);
       bbird.style.display = 'block';
-    };
+    }
 
     function toggleVisibility() {
       if (isVisible()) {
@@ -255,11 +257,11 @@
       } else {
         show();
       }
-    };
+    }
 
     //sets the position
     function reposition(position) {
-      if (position === undefined || position == null) {
+      if (position === undefined || position === null) {
         //set to initial position ('topRight') or move to next position
         position = (state && state.pos === null) ? 1 : (state.pos + 1) % 4;
       }
@@ -272,16 +274,16 @@
       }
       state.pos = position;
       setState();
-    };
+    }
 
     function resize(size) {
       var span;
 
       if (size === undefined || size === null) {
-        size = (state && state.size == null) ? 0 : (state.size + 1) % 2;
+        size = (state && state.size === null) ? 0 : (state.size + 1) % 2;
       }
 
-      classes[1] = (size === 0) ? 'bbSmall' : 'bbLarge'
+      classes[1] = (size === 0) ? 'bbSmall' : 'bbLarge';
 
       span = document.getElementById(IDs.size);
       span.title = (size === 1) ? 'small' : 'large';
@@ -290,7 +292,7 @@
       state.size = size;
       setState();
       scrollToBottom();
-    };
+    }
 
     function setState() {
       var touchClass = "";
@@ -298,7 +300,7 @@
         touchClass = 'vjs-touch ';
       }
       bbird.className = touchClass + classes.join(' ');
-    };
+    }
 
     logger = function(type, messages) {
       addMessage(type, reduce((messages || []), function(str, msg, i) {
@@ -316,7 +318,7 @@
         var args = Array.prototype.slice.call(arrgs);
         logger(type, args);
       });
-    }
+    };
     oldLog = videojs.log;
     historyLogger("info", videojs.log.history);
     historyLogger("debug", videojs.log.debug.history);
@@ -340,7 +342,7 @@
     videojs.log.error = function() { logger('error', arguments); };
     videojs.log.profile = function(label) {
       currentTime = new Date(); //record the current time when profile() is executed
-      if (label == undefined || label == '') {
+      if (label === undefined || label === null || label === '') {
         addMessage('error', '<b>ERROR:</b> Please specify a label for your profile statement');
       }
       else if (profiler[label]) {
@@ -370,8 +372,8 @@
     resize(state.size);
     reposition(state.pos);
     show();
-    this.debuggerWindowMain.show = show;
-    this.debuggerWindowMain.hide = hide;
+    player.debuggerWindowMain.show = show;
+    player.debuggerWindowMain.hide = hide;
 
     scrollToBottom();
 
@@ -382,7 +384,7 @@
       removeEvent(document, 'keyup', readKey);
       removeEvent(document, 'touchend', readGesture);
     });
-  };
+  }
 
   videojs.plugin('debuggerWindowMain', debuggerWindowMain);
 })(videojs, window);

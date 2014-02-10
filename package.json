@@ -9,5 +9,15 @@
   },
   "author": "",
   "license": "Apache 2.0",
-  "readmeFilename": "README.md"
+  "readmeFilename": "README.md",
+  "devDependencies": {
+    "grunt-contrib-copy": "~0.5.0",
+    "grunt-cli": "~0.1.13",
+    "grunt-contrib-uglify": "~0.3.2",
+    "grunt-contrib-cssmin": "~0.7.0",
+    "grunt": "~0.4.2",
+    "grunt-contrib-jshint": "~0.8.0",
+    "load-grunt-tasks": "~0.3.0",
+    "grunt-contrib-compress": "~0.6.1"
+  }
 }
