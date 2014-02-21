@@ -1,3 +1,7 @@
+<a href="http://trunkcity/viewType.html?buildTypeId=ExperimentalVideoJsPlayerDebugger_10Continuous&guest=1">
+<img src="http://teamcity/app/rest/builds/buildType:(id:ExperimentalVideoJsPlayerDebugger_10Continuous)/statusIcon"/>
+</a>
+
 # videojs-debugger
 
 ## Including
