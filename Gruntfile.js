@@ -1,3 +1,6 @@
+'use strict';
+var releaseType = process.env.RELEASE_TYPE || 'prerelease';
+
 module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -18,6 +21,11 @@ module.exports = function(grunt) {
             src: 'src/js/debugger.js',
             dest: 'dist/debugger.js'
           }
+        ]
+      },
+      version: {
+        files: [
+          { expand: true, cwd: 'dist', src: ['*'], dest: 'dist/<%= pkg.version %>/' }
         ]
       }
     },
@@ -58,11 +66,18 @@ module.exports = function(grunt) {
         expand: true,
         src: ['**']
       }
+    },
+
+    release: {
+      options: {
+        npm: false
+      }
     }
   });
 
   require('load-grunt-tasks')(grunt);
 
-  grunt.registerTask('default', ['jshint', 'copy', 'uglify', 'cssmin']);
-  grunt.registerTask('package', ['default', 'compress:package']);
+  grunt.registerTask('default', ['jshint', 'copy:build', 'uglify', 'cssmin']);
+  grunt.registerTask('package', ['default', 'copy:version', 'compress:package']);
+  grunt.registerTask('version', 'This should only be called by Team City!', ['release:' + releaseType ]);
 };
