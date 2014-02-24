@@ -57,6 +57,7 @@ Once the the plugin gets loaded, there are several extra logging methods availab
 * Once, the version and artifact build is complete, trigger the [Stage to S3 Build](http://trunkcity/viewType.html?buildTypeId=ExperimentalVideoJsPlayerDebugger_12StageToS3)
 * Log into james, and then ssh into the machine you'd like to deploy to.  This can be a production or staging machine.
 * Run the following commands: 
+
 ```bash
 cd /usr/local/brightcove/dangerzone
 sudo -u tomcat bash -c "source ./environmentVariables.sh && node_modules/grunt-cli/bin/grunt --gruntfile=node_modules/cdn-deploy/Gruntfile.js --name=videojs-debugger --number=production"
