@@ -48,3 +48,16 @@ Once the the plugin gets loaded, there are several extra logging methods availab
 
 * Email: To test emailing the log, you will need to supply a recipient's email address when your email client opens.
 * Email: Currently, email does not format the log dump.  The contents of the email are the contents of the array of Strings, separated by commas.  Would formatting be handled better on the server side?
+
+## Deploying new versions
+
+* Confirm that the [Continuous Build](http://trunkcity/viewType.html?buildTypeId=ExperimentalVideoJsPlayerDebugger_10Continuous) has passed on master with your changes.
+* Trigger the [Version and Artifact Build](http://trunkcity/viewType.html?buildTypeId=ExperimentalVideoJsPlayerDebugger_11CreateVersionedReleaseArtifact)
+* When prompted select the [proper versioning strategy](http://semver.org/) based on your changes.
+* Once, the version and artifact build is complete, trigger the [Stage to S3 Build](http://trunkcity/viewType.html?buildTypeId=ExperimentalVideoJsPlayerDebugger_12StageToS3)
+* Log into james, and then ssh into the machine you'd like to deploy to.  This can be a production or staging machine.
+* Run the following commands: 
+```bash
+cd /usr/local/brightcove/dangerzone
+sudo -u tomcat bash -c "source ./environmentVariables.sh && node_modules/grunt-cli/bin/grunt --gruntfile=node_modules/cdn-deploy/Gruntfile.js --name=videojs-debugger --number=production"
+```
