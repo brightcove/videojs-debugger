@@ -31,6 +31,11 @@ module.exports = function(grunt) {
     },
 
     cssmin: {
+      options: {
+        banner: '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
+                '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
+                ' * Copyright (c) <%= grunt.template.today("yyyy") %> Brightcove  */\n'
+      },
       build: {
         files: {
           'dist/debugger.css': ['src/css/debugger.css']
@@ -39,6 +44,11 @@ module.exports = function(grunt) {
     },
 
     uglify: {
+      options: {
+        banner: '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
+                '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
+                ' * Copyright (c) <%= grunt.template.today("yyyy") %> Brightcove  */\n'
+      },
       build: {
         files: [{
             src: 'src/js/bootstrap.js',
@@ -50,6 +60,8 @@ module.exports = function(grunt) {
         ]
       }
     },
+
+    clean: ['dist'],
 
     watch: {
       files: ['src/js/*.js'],
@@ -77,7 +89,7 @@ module.exports = function(grunt) {
 
   require('load-grunt-tasks')(grunt);
 
-  grunt.registerTask('default', ['jshint', 'copy:build', 'uglify', 'cssmin']);
+  grunt.registerTask('default', ['clean', 'jshint', 'copy:build', 'uglify', 'cssmin']);
   grunt.registerTask('package', ['default', 'copy:version', 'compress:package']);
   grunt.registerTask('version', 'This should only be called by Team City!', ['release:' + releaseType ]);
 };
