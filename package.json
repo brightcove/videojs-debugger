@@ -27,6 +27,6 @@
     "grunt-contrib-clean": "~0.5.0"
   },
   "peerDependencies": {
-    "video.js": "~4.4"
+    "video.js": "^4.4"
   }
 }
