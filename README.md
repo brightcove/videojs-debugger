@@ -1,5 +1,8 @@
 [![Build Status](http://teamcity/app/rest/builds/buildType:\(id:ExperimentalVideoJsPlayerDebugger_10Continuous\)/statusIcon)](http://trunkcity/viewType.html?buildTypeId=ExperimentalVideoJsPlayerDebugger_10Continuous&guest=1)
 
+This plugin has been open sourced and is available on [github](https://github.com/brightcove/videojs-debugger) now.
+
+
 # videojs-debugger
 
 ## Including
