@@ -1,0 +1,32 @@
+{
+  "name": "videojs-debugger",
+  "version": "0.1.6",
+  "description": "A debugger for videojs",
+  "private": true,
+  "main": "src/js/bootstrap.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com/brightcove/videojs-debugger.git"
+  },
+  "author": {
+    "name": "Brightcove",
+    "email": "donotreply@brightcove.com"
+  },
+  "license": "Apache 2.0",
+  "readmeFilename": "README.md",
+  "devDependencies": {
+    "grunt-contrib-copy": "~0.5.0",
+    "grunt-cli": "~0.1.13",
+    "grunt-contrib-uglify": "~0.3.2",
+    "grunt-contrib-cssmin": "~0.7.0",
+    "grunt": "~0.4.2",
+    "grunt-contrib-jshint": "~0.8.0",
+    "load-grunt-tasks": "~0.3.0",
+    "grunt-contrib-compress": "~0.6.1",
+    "grunt-release": "0.7.0",
+    "grunt-contrib-clean": "~0.5.0"
+  },
+  "peerDependencies": {
+    "video.js": "^4.4"
+  }
+}

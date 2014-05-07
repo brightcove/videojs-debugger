@@ -1,0 +1,269 @@
+/*
+ * Originally based on Blackbird
+ * MIT License - Copyright (c) Blackbird Project <http://blackbirdjs.googlecode.com/>
+ */
+#blackbird {
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  font: 11px/1.3 Consolas, 'Lucida Console', Monaco, monospace;
+  z-index: 100;
+}
+#blackbird.vjs-touch {
+  font: 18px/1.3 Consolas, 'Lucida Console', Monaco, monospace;
+}
+
+#blackbird.bbTopLeft {
+  top: 0;
+  left: 0;
+}
+
+#blackbird.bbTopRight {
+  top: 0;
+  right: 0;
+}
+
+#blackbird.bbBottomLeft {
+  bottom: 0;
+  left: 0;
+}
+
+#blackbird.bbBottomRight {
+  bottom: 0;
+  right: 0;
+}
+
+#blackbird.bbSmall {
+  width: 300px;
+}
+#blackbird.vjs-touch.bbSmall {
+  width: 528px;
+}
+
+#blackbird.bbSmall .main {
+  height: 200px;
+  width: 272px;
+}
+#blackbird.vjs-touch.bbSmall .main {
+  height: 300px;
+  width: 500px;
+}
+
+#blackbird.bbLarge {
+  width: 500px;
+}
+#blackbird.vjs-touch.bbLarge,
+#blackbird.vjs-touch.bbLarge .main {
+  width: 660px;
+}
+
+#blackbird.bbLarge .header .left {
+  width: 336px;
+}
+#blackbird.vjs-touch.bbLarge .header .left,
+#blackbird.vjs-touch.bbLarge .header .right {
+  width: 316px;
+}
+
+#blackbird.bbLarge .main {
+  height: 500px;
+}
+
+#blackbird.bbLarge .header,
+#blackbird.bbLarge .footer,
+#blackbird.bbLarge .main {
+  width: 472px;
+}
+#blackbird.vjs-touch.bbLarge .header,
+#blackbird.vjs-touch.bbLarge .footer,
+#blackbird.vjs-touch.bbLarge .main {
+  width: 632px;
+}
+
+
+
+#blackbird span.fa {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  font-size: 16px;
+  margin: 0 4px;
+  float: left;
+  color: white;
+}
+#blackbird.vjs-touch span.fa {
+  width: 32px;
+  height: 32px;
+  font-size: 32px;
+  margin: 0 8px;
+}
+
+#blackbird span.fa.error.disabled:before,
+#blackbird span.fa.warn.disabled:before,
+#blackbird span.fa.info.disabled:before,
+#blackbird span.fa.debug.disabled:before,
+#blackbird span.fa.profile.disabled:before {
+  color: white;
+}
+
+#blackbird span.fa.error:before {
+  color: red;
+  content: "\f057"; /* fa-times-circle */
+}
+
+#blackbird span.fa.warn:before {
+  color: yellow;
+  content: "\f071"; /* fa-exclamation-triangle */
+}
+
+#blackbird span.fa.info:before {
+  color: blue;
+  content: "\f05a"; /* fa-info-circle */
+}
+
+#blackbird span.fa.debug:before {
+  color: green;
+  content: "\f14a"; /* fa-check-square */
+}
+
+#blackbird span.fa.profile:before {
+  color: orange;
+  content: "\f017"; /* fa-clock-o */
+}
+
+#blackbird span.fa.email:before {
+  content: "\f003"; /* fa-envelope-o */
+}
+
+#blackbird span.fa.close:before {
+  content: "\f00d"; /* fa-envelope-o */
+}
+
+#blackbird span.fa.clear:before {
+  content: "\f014"; /* fa-trash-o */
+}
+
+#blackbird span.fa.small:before {
+  content: "\f066"; /* fa-compress */
+}
+
+#blackbird span.fa.large:before {
+  content: "\f065"; /* fa-expand */
+}
+
+#blackbird .header,
+#blackbird .main,
+#blackbird .footer {
+  border-left: solid #F4F4F4 3px;
+  border-right: solid #F4F4F4 3px;
+}
+
+#blackbird .header {
+  background-color: #000;
+  border-top: solid #F4F4F4 3px;
+  border-bottom: solid #333 1px;
+  height: 32px;
+  float: left;
+  width: 272px;
+  margin: 14px 8px 0 8px;
+  border-radius: 10px 10px 0 0;
+  float: left;
+}
+#blackbird.vjs-touch .header {
+  width: 500px;
+  height: 50px;
+}
+
+#blackbird .header .left,
+#blackbird .header .right {
+  float: left;
+  width: 136px;
+}
+#blackbird.vjs-touch .header .left,
+#blackbird.vjs-touch .header .right {
+  width: 250px;
+}
+
+#blackbird .header .left {
+  background-position: top left;
+}
+
+#blackbird .header .left .filters {
+  padding: 10px 0 0 10px;
+  float: left;
+}
+
+#blackbird .header .right .controls {
+  padding: 10px 10px 0 0;
+  float: right;
+}
+
+#blackbird .header .right .controls span.email,
+#blackbird .header .right .controls span.clear {
+  margin-right: 15px;
+}
+#blackbird.vjs-touch .header .right .controls span.email,
+#blackbird.vjs-touch .header .right .controls span.clear {
+  margin-right: 25px;
+}
+
+#blackbird .main {
+  background-color: #0E0E0E;
+  margin: 0 14px 0 8px;
+  float: left;
+}
+
+#blackbird .main ol {
+  line-height:  1.45;
+  height: 100%;
+  overflow: auto;
+  width: 100%;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#blackbird .main ol li {
+  padding: 1px 4px 1px 20px;
+  border-bottom:  1px solid #333;
+  color: #CCC;
+  margin:  2px 2px;
+}
+#blackbird.vjs-touch .main ol li {
+  padding-left: 40px;
+}
+
+#blackbird .main ol li span {
+  display: block;
+  margin-left: -18px;
+}
+#blackbird.vjs-touch .main ol li span {
+  margin-left: -36px;
+}
+
+#blackbird .main ol li.profile {
+  color: #DDD;
+  font-style: italic;
+}
+
+#blackbird .errorHidden li.error,
+#blackbird .warnHidden li.warn,
+#blackbird .infoHidden li.info,
+#blackbird .debugHidden li.debug,
+#blackbird .profileHidden li.profile {
+  display: none;
+}
+
+#blackbird .footer {
+  background-color: #0E0E0E;
+  border-bottom: solid #F4F4F4 3px;
+  border-top: solid #333 1px;
+  height: 10px;
+  float: left;
+  width: 272px;
+  margin: 0 8px 0 8px;
+  border-radius: 0 0 10px 10px;
+}
+#blackbird.vjs-touch .footer {
+  width: 500px;
+}
