@@ -5,7 +5,7 @@
 (function(videojs, window, undefined) {
   'use strict';
 
-  var events = videojs.Player.prototype.debuggerWindow.getEvents;
+  var events = videojs.getComponent('Player').prototype.debuggerWindow.getEvents;
 
   function reduce(arr, callback, initial) {
     var returnValue = initial,
@@ -296,7 +296,7 @@
 
     function setState() {
       var touchClass = "";
-      if (videojs.TOUCH_ENABLED) {
+      if (videojs.browser.TOUCH_ENABLED) {
         touchClass = 'vjs-touch ';
       }
       bbird.className = touchClass + classes.join(' ');

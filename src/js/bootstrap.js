@@ -97,21 +97,21 @@
       }
     };
 
-    s.src = options.js || "debugger.js";
+    s.src = options.js || 'debugger.js';
 
-    debuggerStyle.rel = "stylesheet";
-    fontawesome.rel = "stylesheet";
-    debuggerStyle.href = options.css || "debugger.css";
-    fontawesome.href = "//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css";
+    debuggerStyle.rel = 'stylesheet';
+    fontawesome.rel = 'stylesheet';
+    debuggerStyle.href = options.css || 'debugger.css';
+    fontawesome.href = '//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css';
 
     document.body.appendChild(s);
     document.body.appendChild(debuggerStyle);
     document.body.appendChild(fontawesome);
   }
 
-  videojs.plugin("debuggerWindow", function(opts) {
+  videojs.plugin('debuggerWindow', function(opts) {
     var events = getEvents(loadDebugger),
-        videoEvents = filter(videojs.Html5.Events, function(event) { return event !== 'timeupdate' && event !== 'progress' && event !== 'suspend'; }),
+        videoEvents = filter(videojs.getComponent('Html5').Events, function(event) { return event !== 'timeupdate' && event !== 'progress' && event !== 'suspend'; }),
         i = videoEvents.length,
         eventHandlerFunction;
 
