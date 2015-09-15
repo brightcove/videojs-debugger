@@ -139,9 +139,7 @@
     }
 
     videojs.log.debug = makeCachedLogger();
-    videojs.log.warn = makeCachedLogger();
     videojs.log.info = videojs.log;
-    videojs.log.error = makeCachedLogger();
 
     eventHandlerFunction = function(event) {
       videojs.log.debug({

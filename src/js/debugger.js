@@ -337,9 +337,17 @@
     videojs.log.clear = function() { clear(); };
     videojs.log.move = function() { reposition(); };
     videojs.log.debug = function() { logger('debug', arguments); };
-    videojs.log.warn = function() { logger('warn', arguments); };
+    videojs.log.warn = function() {
+      var args = Array.prototype.slice.call(arguments);
+      logger('warn', args);
+      videojs.log.oldLog.warn.apply(null, arguments);
+    };
     videojs.log.info = videojs.log;
-    videojs.log.error = function() { logger('error', arguments); };
+    videojs.log.error = function() {
+      var args = Array.prototype.slice.call(arguments);
+      logger('error', args);
+      videojs.log.oldLog.error.apply(null, arguments);
+    };
     videojs.log.profile = function(label) {
       currentTime = new Date(); //record the current time when profile() is executed
       if (label === undefined || label === null || label === '') {
