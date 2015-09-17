@@ -302,7 +302,15 @@
       bbird.className = touchClass + classes.join(' ');
     }
 
+    oldLog = videojs.log;
+    videojs.log = {};
+    videojs.log.oldLog = oldLog;
+
     logger = function(type, messages) {
+      if (videojs.log.oldLog[type]) {
+        videojs.log.oldLog[type].apply(null, arguments);
+      }
+
       addMessage(type, reduce((messages || []), function(str, msg, i) {
         var sMsg;
         try {
@@ -319,7 +327,7 @@
         logger(type, args);
       });
     };
-    oldLog = videojs.log;
+
     historyLogger("info", videojs.log.history);
     historyLogger("debug", videojs.log.debug.history);
     historyLogger("warn", videojs.log.warn.history);
@@ -331,23 +339,14 @@
 
       videojs.log.oldLog.apply(videojs, arguments);
     };
-    videojs.log.oldLog = oldLog;
 
     videojs.log.resize = function() { resize(); };
     videojs.log.clear = function() { clear(); };
     videojs.log.move = function() { reposition(); };
     videojs.log.debug = function() { logger('debug', arguments); };
-    videojs.log.warn = function() {
-      var args = Array.prototype.slice.call(arguments);
-      logger('warn', args);
-      videojs.log.oldLog.warn.apply(null, arguments);
-    };
+    videojs.log.warn = function() { logger('warn', arguments); };
     videojs.log.info = videojs.log;
-    videojs.log.error = function() {
-      var args = Array.prototype.slice.call(arguments);
-      logger('error', args);
-      videojs.log.oldLog.error.apply(null, arguments);
-    };
+    videojs.log.error = function() { logger('error', arguments); };
     videojs.log.profile = function(label) {
       currentTime = new Date(); //record the current time when profile() is executed
       if (label === undefined || label === null || label === '') {

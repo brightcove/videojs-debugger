@@ -130,8 +130,12 @@
     player.debuggerWindow.getEvents = getEvents;
     player.debuggerWindow.loadDebugger = loadDebugger;
 
-    function makeCachedLogger() {
+    function makeCachedLogger(fn) {
       function logger() {
+        if (fn) {
+          fn.apply(null, arguments);
+        }
+
         logger.history.push(arguments);
       }
       logger.history = [];
@@ -139,7 +143,9 @@
     }
 
     videojs.log.debug = makeCachedLogger();
-    videojs.log.info = videojs.log;
+    videojs.log.warn = makeCachedLogger(videojs.log.warn);
+    videojs.log.info = makeCachedLogger(videojs.log);
+    videojs.log.error = makeCachedLogger(videojs.log.error);
 
     eventHandlerFunction = function(event) {
       videojs.log.debug({
