@@ -111,7 +111,7 @@
 
   videojs.plugin("debuggerWindow", function(opts) {
     var events = getEvents(loadDebugger),
-        videoEvents = filter(videojs.Html5.Events, function(event) { return event !== 'timeupdate' && event !== 'progress' && event !== 'suspend'; }),
+        videoEvents = filter(videojs.getComponent('Html5').Events, function(event) { return event !== 'timeupdate' && event !== 'progress' && event !== 'suspend'; }),
         i = videoEvents.length,
         eventHandlerFunction;
 
@@ -130,8 +130,12 @@
     player.debuggerWindow.getEvents = getEvents;
     player.debuggerWindow.loadDebugger = loadDebugger;
 
-    function makeCachedLogger() {
+    function makeCachedLogger(fn) {
       function logger() {
+        if (fn) {
+          fn.apply(null, arguments);
+        }
+
         logger.history.push(arguments);
       }
       logger.history = [];
@@ -139,9 +143,9 @@
     }
 
     videojs.log.debug = makeCachedLogger();
-    videojs.log.warn = makeCachedLogger();
-    videojs.log.info = videojs.log;
-    videojs.log.error = makeCachedLogger();
+    videojs.log.warn = makeCachedLogger(videojs.log.warn);
+    videojs.log.info = makeCachedLogger(videojs.log);
+    videojs.log.error = makeCachedLogger(videojs.log.error);
 
     eventHandlerFunction = function(event) {
       videojs.log.debug({
