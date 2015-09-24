@@ -303,12 +303,12 @@
     }
 
     oldLog = videojs.log;
-    videojs.log = {};
-    videojs.log.oldLog = oldLog;
 
     logger = function(type, messages) {
-      if (videojs.log.oldLog[type]) {
-        videojs.log.oldLog[type].apply(null, arguments);
+      if (oldLog[type]) {
+        oldLog[type].apply(null, messages);
+      } else if (type === 'info') {
+        oldLog.apply(null, messages);
       }
 
       addMessage(type, reduce((messages || []), function(str, msg, i) {
@@ -328,18 +328,8 @@
       });
     };
 
-    historyLogger("info", videojs.log.history);
-    historyLogger("debug", videojs.log.debug.history);
-    historyLogger("warn", videojs.log.warn.history);
-    historyLogger("error", videojs.log.error.history);
-
-    videojs.log = function() {
-      var args = Array.prototype.slice.call(arguments);
-      logger("info", args);
-
-      videojs.log.oldLog.apply(videojs, arguments);
-    };
-
+    videojs.log = function() { logger('info', arguments); };
+    videojs.log.oldLog = oldLog;
     videojs.log.resize = function() { resize(); };
     videojs.log.clear = function() { clear(); };
     videojs.log.move = function() { reposition(); };
@@ -362,6 +352,11 @@
       }
       return currentTime;
     };
+
+    historyLogger("info", videojs.log.history);
+    historyLogger("debug", videojs.log.debug.history);
+    historyLogger("warn", videojs.log.warn.history);
+    historyLogger("error", videojs.log.error.history);
 
     bbird = document.body.appendChild(generateMarkup());
     outputList = bbird.getElementsByTagName('OL')[0];
