@@ -3,6 +3,9 @@
   "version": "2.0.0",
   "description": "A debugger for videojs",
   "main": "src/js/bootstrap.js",
+  "scripts": {
+    "prepublish": "grunt"
+  },
   "repository": {
     "type": "git",
     "url": "git@github.com/brightcove/videojs-debugger.git"
@@ -25,5 +28,11 @@
     "grunt-release": "0.7.0",
     "grunt-contrib-clean": "~0.5.0",
     "video.js": "^4.12"
-  }
+  },
+  "files": [
+    "dist/",
+    "src/",
+    "Gruntfile.js",
+    "index.html"
+  ]
 }
