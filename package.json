@@ -4,7 +4,9 @@
   "description": "A debugger for videojs",
   "main": "src/js/bootstrap.js",
   "scripts": {
-    "prepublish": "grunt"
+    "prepublish": "grunt build",
+    "preversion": "grunt",
+    "test": "grunt"
   },
   "repository": {
     "type": "git",
@@ -17,17 +19,22 @@
   "license": "Apache-2.0",
   "readmeFilename": "README.md",
   "devDependencies": {
-    "grunt-contrib-copy": "~0.5.0",
-    "grunt-cli": "~0.1.13",
-    "grunt-contrib-uglify": "~0.3.2",
-    "grunt-contrib-cssmin": "~0.7.0",
     "grunt": "~0.4.2",
-    "grunt-contrib-jshint": "~0.8.0",
-    "load-grunt-tasks": "~0.3.0",
-    "grunt-contrib-compress": "~0.6.1",
-    "grunt-release": "0.7.0",
+    "grunt-cli": "~0.1.13",
     "grunt-contrib-clean": "~0.5.0",
-    "video.js": "^4.12"
+    "grunt-contrib-compress": "~0.6.1",
+    "grunt-contrib-copy": "~0.5.0",
+    "grunt-contrib-cssmin": "~0.7.0",
+    "grunt-contrib-jshint": "~0.8.0",
+    "grunt-contrib-uglify": "~0.3.2",
+    "grunt-karma": "^0.12.1",
+    "grunt-release": "0.7.0",
+    "karma": "^0.13.19",
+    "karma-firefox-launcher": "^0.1.7",
+    "karma-qunit": "^0.1.9",
+    "load-grunt-tasks": "~0.3.0",
+    "qunitjs": "^1.20.0",
+    "video.js": "^5.0.0"
   },
   "files": [
     "dist/",
