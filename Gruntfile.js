@@ -97,8 +97,9 @@ module.exports = function(grunt) {
 
   require('load-grunt-tasks')(grunt);
 
-  grunt.registerTask('test', ['karma']);
-  grunt.registerTask('default', ['clean', 'jshint', 'test', 'copy:build', 'uglify', 'cssmin']);
+  grunt.registerTask('test', ['jshint', 'karma']);
+  grunt.registerTask('build',['clean', 'copy:build', 'uglify', 'cssmin']);
+  grunt.registerTask('default', ['test', 'build']);
   grunt.registerTask('package', ['default', 'copy:version', 'compress:package']);
   grunt.registerTask('version', ['release:' + releaseType ]);
 };
