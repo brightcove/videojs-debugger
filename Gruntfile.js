@@ -80,6 +80,14 @@ module.exports = function(grunt) {
       }
     },
 
+    karma: {
+      test: {
+        options:{
+          configFile: 'test/karma.config.js'
+        }
+      }
+    },
+
     release: {
       options: {
         npm: false
@@ -89,7 +97,9 @@ module.exports = function(grunt) {
 
   require('load-grunt-tasks')(grunt);
 
-  grunt.registerTask('default', ['clean', 'jshint', 'copy:build', 'uglify', 'cssmin']);
+  grunt.registerTask('test', ['jshint', 'karma']);
+  grunt.registerTask('build',['clean', 'copy:build', 'uglify', 'cssmin']);
+  grunt.registerTask('default', ['test', 'build']);
   grunt.registerTask('package', ['default', 'copy:version', 'compress:package']);
   grunt.registerTask('version', ['release:' + releaseType ]);
 };
