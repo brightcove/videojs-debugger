@@ -1,5 +1,7 @@
 # videojs-debugger
 
+[![Build Status](https://travis-ci.org/brightcove/videojs-debugger.svg?branch=master)](https://travis-ci.org/brightcove/videojs-debugger)
+
 ## Including
 
 1. Include `bootstrap.js` in after `video.js`: `<script src="src/js/bootstrap.js"></script>`
